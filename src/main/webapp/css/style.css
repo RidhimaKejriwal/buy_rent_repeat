@@ -1,9 +1,45 @@
-.primary-bg{
-    background:#075B7A !important;
-    color: white;
+.custom-bg{
+    background:#075B7A!important;
+    color:white;
 }
 
-.logo{
-    
+.logo
+{
+    width: 50px;
+    height: 50px;
+}
+
+.custom-bg2{
+    background:#64FFDA!important;
+    color: black;
+}
+
+button:hover{
+    background: #00BFA5!important;
+}
+
+a:hover{
+    color: #CFD8DC!important;
+}
+
+.cover{
+    height: 200px;
+    width: auto;
+}
+
+.highlight{
+    color: #075B7A!important;
+}
+
+.icon{
+    width: 5vw;
+    height: 5vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h3,p{
+    text-align: center;
 }
 
