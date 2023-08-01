@@ -14,11 +14,12 @@
     color: black;
 }
 
-button:hover{
+.hv:hover{
     background: #00BFA5!important;
+    color: white;
 }
 
-a:hover{
+alink:hover{
     color: #CFD8DC!important;
 }
 

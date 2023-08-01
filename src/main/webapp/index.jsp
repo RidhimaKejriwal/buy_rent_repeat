@@ -4,13 +4,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>buyRent : HOME PAGE</title>
         <link rel="stylesheet" href="css/style.css">
         <script src="js/script.js" ></script>
         <%@include file="components/common_css_js.jsp" %>
     </head>
     <body>
         <%@include file="components/navbar.jsp" %>
+        <%@include file="register.jsp" %>
+        <%@include file="login.jsp" %>
 
         <!--cover photo-->
         <div class="container">
@@ -20,11 +22,11 @@
                     <p style="text-align: left">Connect with people in your area and exchange the Stuff and return them after use at fairly low rent.</p>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success hv" type="submit">Search</button>
                     </form>
                     <div style="margin-top: 20px;">
-                        <button type='button' style="margin-right: 20px" class="btn custom-bg2">List an item</button>
-                        <button type='button' class="btn custom-bg2">Browse</button>
+                        <button type='button' style="margin-right: 20px" class="btn custom-bg2 hv">List an item</button>
+                        <button type='button' class="btn custom-bg2 hv">Browse</button>
                     </div>
 
                 </div>
@@ -66,7 +68,7 @@
         </div>
         
         <!--donate poster-->
-        <div class="container-fluid" style="background-color: #1e4040">
+        <div id="donate" class="container-fluid" style="background-color: #1e4040">
             <div class="row mt-4 mb-3">
                 <div class="col">
                     <img src="img/donate.png" style="height: 400px; width: 550px;;" alt="img..">
@@ -75,7 +77,7 @@
                     <h1 style="color: white; text-align: center">Give your unused stuff for the <b style="color: cyan">happiness</b> of others.</h1>
                     <h3 style="text-align: center; color: white">Give a little, Help a lot!</h3>
                     <div style="justify-content: center; align-items: center; display: flex; margin-top: 40px;" >
-                        <button type='button'  class="btn custom-bg2">Donate Now!</button>
+                        <a href="donate.jsp"><button type='button' class="btn custom-bg2">Donate Now!</button></a>
                     </div>
                 </div>
                 

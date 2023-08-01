@@ -10,7 +10,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Request->Rent->Repeat</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle active alink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </a>
                     <ul class="dropdown-menu">
@@ -23,15 +23,16 @@
                 </li>
             </ul>
             <ul class="navbar-nav mb-lg-0 ">
-                <button type='button' style="margin-right: 20px" class="btn custom-bg2">Login</button>
-                <button type='button' class="btn custom-bg2">Register</button>
+                <button type='button' style="margin-right: 20px" class="btn custom-bg2 hv" data-bs-toggle="modal" data-bs-target="#login">Login</button>
+                <button type='button' class="btn custom-bg2 hv" data-bs-toggle="modal" data-bs-target="#register">Register</button>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Guide</a>
+                    <a class="nav-link active alink" href="#">Guide</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Donate</a>
+                    <a class="nav-link active alink" href="#donate">Donate</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
