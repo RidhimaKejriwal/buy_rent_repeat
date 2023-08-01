@@ -13,7 +13,9 @@
         <%@include file="components/navbar.jsp" %>
         <%@include file="register.jsp" %>
         <%@include file="login.jsp" %>
-
+        <%
+            out.println(FactoryProvider.getFactory());
+        %>
         <!--cover photo-->
         <div class="container">
             <div class="row mt-4 mb-3">

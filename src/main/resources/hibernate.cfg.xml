@@ -12,7 +12,8 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
         
-        
+        <mapping class="com.learn.buyrent.entities.User"/>
+        <mapping class="com.learn.buyrent.entities.Seller"/>
     </session-factory>
 </hibernate-configuration>
 
