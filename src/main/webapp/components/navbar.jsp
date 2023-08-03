@@ -26,7 +26,7 @@
                 <button type='button' style="margin-right: 20px" class="btn custom-bg2 hv" data-bs-toggle="modal" data-bs-target="#login">Login</button>
                 <button type='button' class="btn custom-bg2 hv" data-bs-toggle="modal" data-bs-target="#register">Register</button>
                 <li class="nav-item">
-                    <a class="nav-link active alink" href="#">Guide</a>
+                    <a class="nav-link active alink" href="guide.jsp">Guide</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active alink" href="#donate">Donate</a>

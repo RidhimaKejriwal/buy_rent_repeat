@@ -1,11 +1,12 @@
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>buyRent : DONATE PAGE</title>
+        <title>buyRent : Guide Page</title>
     </head>
     <body>
-        <h1>This is donate page..</h1>
+        <h1>This is Guide page!</h1>
     </body>
 </html>
