@@ -14,7 +14,7 @@
         <%@include file="register.jsp" %>
         <%@include file="login.jsp" %>
         <%
-            out.println(FactoryProvider.getFactory());
+            //out.println(FactoryProvider.getFactory());
         %>
         <!--cover photo-->
         <div class="container">

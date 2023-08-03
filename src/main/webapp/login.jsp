@@ -25,7 +25,7 @@
                         <label for="exampleInputPassword1" class="form-label">Enter Password</label>
                         <input name="password" type="password" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <p>If not registered <a href="register.jsp">Click here</a></p>
+                    <p>If not registered <button type='button' class="btn custom-bg text-white hv" data-bs-toggle="modal" data-bs-target="#register">Click here</button></p>
                 </form>
             </div>
             <div class="modal-footer">
