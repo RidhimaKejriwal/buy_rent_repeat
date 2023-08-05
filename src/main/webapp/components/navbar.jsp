@@ -23,8 +23,12 @@
                 </li>
             </ul>
             <ul class="navbar-nav mb-lg-0 ">
-                <button type='button' style="margin-right: 20px" class="btn custom-bg2 hv" data-bs-toggle="modal" data-bs-target="#login">Login</button>
-                <button type='button' class="btn custom-bg2 hv" data-bs-toggle="modal" data-bs-target="#register">Register</button>
+                <li class="nav-item">
+                    <a class="nav-link active alink" href="login.jsp"> <i class="fa fa-user-circle"></i> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active alink" href="register.jsp"> <i class="fa fa-user-plus"></i> Register</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link active alink" href="guide.jsp">Guide</a>
                 </li>

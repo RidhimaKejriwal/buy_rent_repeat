@@ -19,7 +19,7 @@
     color: white;
 }
 
-alink:hover{
+.alink:hover{
     color: #CFD8DC!important;
 }
 
@@ -49,3 +49,4 @@ h3,p{
     margin-left: auto;
     margin-right: auto;
 }
+

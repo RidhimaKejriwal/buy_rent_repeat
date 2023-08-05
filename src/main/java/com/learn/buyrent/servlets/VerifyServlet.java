@@ -36,6 +36,7 @@ public class VerifyServlet extends HttpServlet {
                 if (b) {
                     HttpSession session = request.getSession();
                     session.setAttribute("authcode", user);
+                    session.setAttribute("message", "We already sent a verification code to your email!..");
                     response.sendRedirect("verifyUser.jsp");
                 } else {
                     System.out.println("There is some problem in sending mail..");
@@ -48,6 +49,7 @@ public class VerifyServlet extends HttpServlet {
                 if (b) {
                     HttpSession session = request.getSession();
                     session.setAttribute("authcode", seller);
+                    session.setAttribute("message", "We already sent a verification code to your email!..");
                     response.sendRedirect("verifySeller.jsp");
                 } else {
                     System.out.println("There is some problem in sending mail..");

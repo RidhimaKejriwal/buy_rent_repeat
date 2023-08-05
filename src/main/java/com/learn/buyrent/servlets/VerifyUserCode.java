@@ -45,7 +45,10 @@ public class VerifyUserCode extends HttpServlet {
                     tx.commit();
                     hibernateSession.close();
                     
-                    out.println("Successfully saved");
+                    HttpSession httpSession = request.getSession();
+                    httpSession.setAttribute("message", "Verification successfull !!..");
+                    response.sendRedirect("register.jsp");
+                    return;
                 }
                 catch(Exception e)
                 {
