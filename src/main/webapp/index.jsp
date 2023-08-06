@@ -1,3 +1,6 @@
+<%@page import="com.learn.buyrent.entities.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="com.learn.buyrent.dao.CategoryDao"%>
 <%@page import="com.learn.buyrent.helper.FactoryProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +16,24 @@
         <%@include file="components/navbar.jsp" %>
         <%
 //            out.println(FactoryProvider.getFactory());
+                CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
+                List<Category> list1 = cdao.getCategories();
         %>
+        <div>
+            <table class="table table-dark table-striped-columns" style="width: 100%; border: 1px solid black;" >
+                <tr align="center">
+                    <%
+                        for (Category category : list1) {
+                    %>
+                    
+                    <td><%= category.getCategoryTitle() %></td>
+                    
+                    <%
+                        }
+                    %>
+                </tr>
+            </table>
+        </div>
         <!--cover photo-->
         <div class="container">
             <div class="row mt-4 mb-3">

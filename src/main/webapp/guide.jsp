@@ -11,8 +11,17 @@
     </head>
     <body>
         <%@include file="components/navbar.jsp" %>
-        <div>
-            
+        <div class="container">
+            <div class="row mt-4 mb-3">
+                <div class="col">
+                    <img style="" src="img/site-map.png" alt="img..">
+                </div>
+                <div class="col text-center">
+                    <h1 class="ghead">How it works</h1>
+                    <p class="gpara">Earn extra and save space by renting your stuff or you can also sell items. Once you've found something to borrow, check that the item is available for the dates you need it. Before you use the item take a few photos of it, this is just to document what condition it was in when you received it.
+Once the rental period is complete, return your item to its owner. You can even donate your items to the listed NGOs and contribute towards changing someone's life for the better.</p
+                </div>
+            </div>
         </div>
     </body>
 </html>

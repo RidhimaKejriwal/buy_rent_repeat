@@ -1,7 +1,10 @@
 package com.learn.buyrent.servlets;
 
+import com.learn.buyrent.dao.SellerDao;
+import com.learn.buyrent.dao.UserDao;
 import com.learn.buyrent.entities.Seller;
 import com.learn.buyrent.entities.User;
+import com.learn.buyrent.helper.FactoryProvider;
 import com.learn.buyrent.helper.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 
 public class VerifyServlet extends HttpServlet {
 
@@ -22,15 +26,37 @@ public class VerifyServlet extends HttpServlet {
             String email = request.getParameter("email");
             String name = request.getParameter("name");
             String password = request.getParameter("password");
+            String cpassword = request.getParameter("cpassword");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             String city = request.getParameter("city");
+            
+            Session s = FactoryProvider.getFactory().openSession();
+            HttpSession httpSession = request.getSession();
+            
+            if(!cpassword.equals(password))
+            {
+                httpSession.setAttribute("error_message", "Confirm password do not match password");
+                response.sendRedirect("register.jsp");
+                return;
+            }
 
             SendMail sm = new SendMail();
             String code = sm.getRandom();
-
+                        
             if (userType.equals("User")) 
             {
+                
+                UserDao userDao = new UserDao(FactoryProvider.getFactory());
+                User user1 = userDao.getUserByEmail(email);
+               
+               if(user1 != null)
+               {                  
+                   httpSession.setAttribute("error_message", "Email already registered");
+                   response.sendRedirect("register.jsp");
+                   return;
+               }
+               
                 User user = new User(email, name, password, phone, address, city, code);
                 boolean b = sm.sendToUser(user);
                 if (b) {
@@ -43,7 +69,17 @@ public class VerifyServlet extends HttpServlet {
                 }
             } 
             else 
-            {
+            {                
+                SellerDao sellerDao = new SellerDao(FactoryProvider.getFactory());
+                Seller seller1 = sellerDao.getUserByEmail(email);
+               
+               if(seller1 != null)
+               {                  
+                   httpSession.setAttribute("error_message", "Email already registered");
+                   response.sendRedirect("register.jsp");
+                   return;
+               }
+               
                 Seller seller = new Seller(email, name, password, phone, address, city, code);
                 boolean b = sm.sendToSeller(seller);
                 if (b) {

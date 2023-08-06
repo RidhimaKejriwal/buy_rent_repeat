@@ -50,3 +50,16 @@ h3,p{
     margin-right: auto;
 }
 
+.ghead{
+    color: #075B7A;
+    margin-top: 25px;
+    text-decoration: underline;
+    font-family: cursive;
+    font-size: 8vh;
+}
+
+.gpara{
+    font-family: monospace;
+    margin-top: 20px;
+    font-size: 3.2vh;
+}
