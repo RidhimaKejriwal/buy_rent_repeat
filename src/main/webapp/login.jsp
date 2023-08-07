@@ -26,10 +26,10 @@
                             <form action="LoginServlet" method="post">
                                 <div class="mb-3">
                                     <label for="exampleInputSelect" class="form-label">Select Login Type</label><span style="color: red">*</span>
-                                    <select name="select" class="form-select" aria-label="Default select example">
+                                    <select name="userType" class="form-select" aria-label="Default select example">
                                         <option selected>--Select--</option>
-                                        <option value="">User</option>
-                                        <option value="">Seller</option>
+                                        <option value="User">User</option>
+                                        <option value="Seller">Seller</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">

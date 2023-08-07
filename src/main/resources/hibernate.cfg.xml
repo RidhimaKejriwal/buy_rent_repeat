@@ -16,6 +16,7 @@
         <mapping class="com.learn.buyrent.entities.Seller"/>
         <mapping class="com.learn.buyrent.entities.Product"/>
         <mapping class="com.learn.buyrent.entities.Category"/>
+        <mapping class="com.learn.buyrent.entities.NGO"/>
     </session-factory>
 </hibernate-configuration>
 

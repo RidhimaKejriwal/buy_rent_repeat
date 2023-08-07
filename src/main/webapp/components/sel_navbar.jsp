@@ -1,6 +1,6 @@
-<%@page import="com.learn.buyrent.entities.User"%>
+<%@page import="com.learn.buyrent.entities.Seller"%>
 <%
-    User user1 = (User) session.getAttribute("current-user");
+    Seller seller1 = (Seller) session.getAttribute("current-seller");
 %>
 
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
@@ -14,9 +14,10 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Request->Rent->Repeat</a>
                 </li>
+                
             </ul>
             <%
-                if (user1 == null) {
+                if (seller1 == null) {
             %>
 
             <ul class="navbar-nav mb-lg-0 ">
@@ -33,7 +34,7 @@
                 %>
                 
                 <li class="nav-item active">
-                    <a class="nav-link active" href="userDashboard.jsp"> <i class="fa fa-user-circle"></i> <%= user1.getUserName() %></a>
+                    <a class="nav-link active" href="userDashboard.jsp"> <i class="fa fa-user-circle"></i> <%= seller1.getUserName() %></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link active" href="LogoutServlet">Logout</a>
@@ -49,7 +50,6 @@
                 <li class="nav-item">
                     <a class="nav-link active alink" href="#donate">Donate</a>
                 </li>
-
             </ul>
         </div>
     </div>
