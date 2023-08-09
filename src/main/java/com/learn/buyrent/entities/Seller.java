@@ -14,6 +14,15 @@ public class Seller
     private String userAddress;
     private String userCity;
     private String userCode;
+    private String userPic;
+
+    public String getUserPic() {
+        return userPic;
+    }
+
+    public void setUserPic(String userPic) {
+        this.userPic = userPic;
+    }
 
     public String getUserEmail() {
         return userEmail;
@@ -74,7 +83,7 @@ public class Seller
     public Seller() {
     }
 
-    public Seller(String userEmail, String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode) {
+    public Seller(String userEmail, String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode, String userPic) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -82,15 +91,17 @@ public class Seller
         this.userAddress = userAddress;
         this.userCity = userCity;
         this.userCode = userCode;
+        this.userPic = userPic;
     }
 
-    public Seller(String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode) {
+    public Seller(String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode, String userPic) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhone = userPhone;
         this.userAddress = userAddress;
         this.userCity = userCity;
         this.userCode = userCode;
+        this.userPic = userPic;
     }
     
     

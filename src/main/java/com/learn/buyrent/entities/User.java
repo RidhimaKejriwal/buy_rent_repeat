@@ -14,7 +14,16 @@ public class User
     private String userAddress;
     private String userCity;
     private String userCode;
+    private String userPic;
 
+    public String getUserPic() {
+        return userPic;
+    }
+
+    public void setUserPic(String userPic) {
+        this.userPic = userPic;
+    }
+    
     public String getUserCode() {
         return userCode;
     }
@@ -71,7 +80,7 @@ public class User
         this.userCity = userCity;
     }
 
-    public User(String userEmail, String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode) {
+    public User(String userEmail, String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode, String userPic) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -79,18 +88,20 @@ public class User
         this.userAddress = userAddress;
         this.userCity = userCity;
         this.userCode = userCode;
+        this.userPic = userPic;
     }
 
     public User() {
     }
 
-    public User(String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode) {
+    public User(String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode, String userPic) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhone = userPhone;
         this.userAddress = userAddress;
         this.userCity = userCity;
         this.userCode = userCode;
+        this.userPic = userPic;
     }
     
     

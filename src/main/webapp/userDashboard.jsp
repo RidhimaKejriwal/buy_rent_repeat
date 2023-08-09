@@ -13,9 +13,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>buyRent : USER DASHBOARD</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>HELLO USER, THIS IS USER DASHBOARD</h1>
     </body>
 </html>

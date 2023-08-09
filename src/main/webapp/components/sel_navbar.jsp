@@ -14,13 +14,17 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Request->Rent->Repeat</a>
                 </li>
-                
             </ul>
+            <ul class="navbar-nav mb-lg-0 ">
+                <li class="nav-item">
+                    <a class="nav-link active alink" href="guide.jsp">Guide</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active alink" href="#donate">Donate</a>
+                </li>
             <%
                 if (seller1 == null) {
             %>
-
-            <ul class="navbar-nav mb-lg-0 ">
                 <li class="nav-item">
                     <a class="nav-link active alink" href="login.jsp"> <i class="fa fa-user-circle"></i> Login</a>
                 </li>
@@ -34,7 +38,7 @@
                 %>
                 
                 <li class="nav-item active">
-                    <a class="nav-link active" href="userDashboard.jsp"> <i class="fa fa-user-circle"></i> <%= seller1.getUserName() %></a>
+                    <a class="nav-link active" href="sellerDashboard.jsp"> <i class="fa fa-user-circle"></i> <%= seller1.getUserName() %></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link active" href="LogoutServlet">Logout</a>
@@ -44,12 +48,7 @@
                     }
                 %>
                 
-                <li class="nav-item">
-                    <a class="nav-link active alink" href="guide.jsp">Guide</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active alink" href="#donate">Donate</a>
-                </li>
+                
             </ul>
         </div>
     </div>
