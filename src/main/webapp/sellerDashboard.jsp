@@ -46,20 +46,19 @@
                                     <tr>
                                         <td width="20%">
                                             <img src="img/default.png" alt="img" style="height: 100px; width: 100px; margin-left: 25px;">
-                                            <h5 style="margin-left: 25px; margin-top: 15px;font-weight: normal;">ridhima_30</h5>
                                         </td>
                                         <td>
                                             <table width="100%">
                                                 <tr class="text-center">
-                                                    <td colspan="2" style="color: #075B7A"><h1>Ridhima Kejriwal</h1></td>
+                                                    <td colspan="2" style="color: #075B7A"><h1><%= nseller.getUserName()%></h1></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Email: <span style="color: #212121">ridhimakejriwal30@gmail.com</span></h5></td>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Phone: <span style="color: #212121">9998887776</span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Email: <span style="color: #212121"><%= nseller.getUserEmail()%></span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Phone: <span style="color: #212121"><%= nseller.getUserPhone() %></span></h5></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Address: <span style="color: #212121">37-A Malik Enclave, Near Days Hotel</span></h5></td>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">City: <span style="color: #212121">Panipat</span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Address: <span style="color: #212121"><%= nseller.getUserAddress() %></span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">City: <span style="color: #212121"><%= nseller.getUserCity() %></span></h5></td>
                                                 </tr>
                                             </table>                                            
                                         </td>
@@ -74,8 +73,8 @@
                 <div class="container">
                     <table class="enable">
                         <tr  class="text-center">
-                            <td style="border: 1px solid"><a href="#">Available Products</a></td>
-                        <td style="border: 1px solid"><a href="#">Un-Available Products</a></td>
+                            <td style="border: 1px solid; padding: 2px;"><a style="color: black; text-decoration: none;" href="#">Enabled Products</a></td>
+                        <td style="border: 1px solid; padding: 2px;"><a style="color: black; text-decoration: none;" href="#">Disabled Products</a></td>
                         </tr>
                     </table>
                 </div>

@@ -1,4 +1,7 @@
-
+<%@page import="com.learn.buyrent.entities.Seller"%>
+<%
+//    Seller nseller = (Seller) session.getAttribute("current-seller");
+%>
 <%@page import="com.learn.buyrent.entities.Category"%>
 <%@page import="java.util.List"%>
 <%@page import="com.learn.buyrent.helper.FactoryProvider"%>
@@ -15,22 +18,22 @@
                 <div class="container text-center">
                     <img src="/buyRent/img/default.png" class="img-fluid" style="border-radius:50%; max-width: 150px">
                     <br>
-                    <h1 class="modal-title fs-5 mt-3" id="exampleModalLabel">Ridhima Kejriwal</h1>
+                    <h1 class="modal-title fs-5 mt-3" id="exampleModalLabel"><%= nseller.getUserName()%></h1>
                     <div style="">
                         <h5 class="mt-2">Please Edit Carefully!!</h5> 
                         <form action="EditServlet" method="post" enctype="multipart/form-data">
                             <table class="table">
                                 <tr>
                                     <td>ID :</td>
-                                    <td><input type="text" class="form-control" name="user_id" value="ridhima_30"></td>
+                                    <td><input readonly type="text" class="form-control" name="user_id" value="<%= nseller.getUserId() %>"></td>
                                 </tr>
                                 <tr>
                                     <td>Email :</td>
-                                    <td><input type="email" readonly class="form-control" name="user_email" value="ridhimakejriwal30@gmail.com"></td>
+                                    <td><input type="email" class="form-control" name="user_email" value="<%= nseller.getUserEmail()%>"></td>
                                 </tr>
                                 <tr>
                                     <td>Name :</td>
-                                    <td><input type="text" class="form-control" name="user_name" value="Ridhima Kejriwal"></td>
+                                    <td><input type="text" class="form-control" name="user_name" value="<%= nseller.getUserName()%>"></td>
                                 </tr>
                                 <tr>
                                     <td>Password :</td>
@@ -38,15 +41,15 @@
                                 </tr>
                                 <tr>
                                     <td>Phone :</td>
-                                    <td><input type="phone" class="form-control" name="user_phone" value="9998887776"></td>
+                                    <td><input type="phone" class="form-control" name="user_phone" value="<%= nseller.getUserPhone() %>"></td>
                                 </tr>
                                 <tr>
                                     <td>Address : </td>
-                                    <td><input type="text" class="form-control" name="user_address" value="37-A"></td>
+                                    <td><input type="text" class="form-control" name="user_address" value="<%= nseller.getUserAddress() %>"></td>
                                 </tr>
                                 <tr>
                                     <td>City : </td>
-                                    <td><input type="text" class="form-control" name="user_city" value="Panipat"></td>
+                                    <td><input type="text" class="form-control" name="user_city" value="<%= nseller.getUserCity() %>"></td>
                                 </tr>
                                 <tr>
                                     <td>Profile pic :</td>
@@ -54,14 +57,11 @@
                                 </tr>
                             </table>
                             <div class="container">
-                                <button type="submit" class="btn custom-bg text-white">Save</button>
+                                <button type="submit" class="btn custom-bg text-white"><span class="fa fa-edit"></span> Save</button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button id="edit-profile-button" type="button" class="btn  custom-bg text-white"><span class="fa fa-edit"></span> EDIT</button>
             </div>
         </div>
     </div>
