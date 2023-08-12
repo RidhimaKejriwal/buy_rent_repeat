@@ -27,14 +27,7 @@ public class VerifySellerCode extends HttpServlet {
             if(code.equals(seller.getUserCode()))
             {
                 try
-                {
-                    String email = request.getParameter(seller.getUserEmail());
-                    String name = request.getParameter(seller.getUserName());                    
-                    String password = request.getParameter(seller.getUserPassword());
-                    String phone = request.getParameter(seller.getUserPhone());
-                    String address = request.getParameter(seller.getUserAddress());
-                    String city = request.getParameter(seller.getUserCity());
-                    
+                {                    
                     String verified = "YES";
                     
                     seller.setUserCode(verified);

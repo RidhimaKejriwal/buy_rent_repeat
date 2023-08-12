@@ -28,13 +28,6 @@ public class VerifyUserCode extends HttpServlet {
             {
                 try
                 {
-                    String email = request.getParameter(user.getUserEmail());
-                    String name = request.getParameter(user.getUserName());                    
-                    String password = request.getParameter(user.getUserPassword());
-                    String phone = request.getParameter(user.getUserPhone());
-                    String address = request.getParameter(user.getUserAddress());
-                    String city = request.getParameter(user.getUserCity());
-                    
                     String verified = "YES";
                     
                     user.setUserCode(verified);

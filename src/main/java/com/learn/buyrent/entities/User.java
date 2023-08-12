@@ -1,12 +1,16 @@
 package com.learn.buyrent.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class User 
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
     private String userEmail;
     private String userName;
     private String userPassword;
@@ -38,6 +42,14 @@ public class User
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -91,18 +103,12 @@ public class User
         this.userPic = userPic;
     }
 
+    
+
     public User() {
     }
 
-    public User(String userName, String userPassword, String userPhone, String userAddress, String userCity, String userCode, String userPic) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userPhone = userPhone;
-        this.userAddress = userAddress;
-        this.userCity = userCity;
-        this.userCode = userCode;
-        this.userPic = userPic;
-    }
+    
     
     
     

@@ -30,6 +30,7 @@ public class VerifyServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             String city = request.getParameter("city");
+            String pic = "default.png";
             
             Session s = FactoryProvider.getFactory().openSession();
             HttpSession httpSession = request.getSession();
@@ -57,7 +58,7 @@ public class VerifyServlet extends HttpServlet {
                    return;
                }
                
-                User user = new User(email, name, password, phone, address, city, code);
+                User user = new User(email, name, password, phone, address, city, code, pic);
                 boolean b = sm.sendToUser(user);
                 if (b) {
                     HttpSession session = request.getSession();
@@ -80,7 +81,7 @@ public class VerifyServlet extends HttpServlet {
                    return;
                }
                
-                Seller seller = new Seller(email, name, password, phone, address, city, code);
+                Seller seller = new Seller(email, name, password, phone, address, city, code, pic);
                 boolean b = sm.sendToSeller(seller);
                 if (b) {
                     HttpSession session = request.getSession();

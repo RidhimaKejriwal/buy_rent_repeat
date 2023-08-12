@@ -63,3 +63,11 @@ h3,p{
     margin-top: 20px;
     font-size: 3.2vh;
 }
+
+.enable{
+    width: 100%;
+    margin-top: 20px;
+    font-family:cursive;
+    border: 1px solid;
+    background: lavender;
+}

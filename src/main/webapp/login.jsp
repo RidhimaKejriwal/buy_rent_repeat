@@ -30,6 +30,7 @@
                                         <option selected>--Select--</option>
                                         <option value="User">User</option>
                                         <option value="Seller">Seller</option>
+                                        <option value="Admin">Admin</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">

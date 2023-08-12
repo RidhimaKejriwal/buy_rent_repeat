@@ -24,6 +24,18 @@ public class Product
     private String pUsedFor;
     @ManyToOne
     private Category category;
+    private String product_Enable;
+    private String product_Approved;
+    @ManyToOne
+    private Seller seller_id;
+
+    public Seller getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(Seller seller_id) {
+        this.seller_id = seller_id;
+    }
 
     public int getpId() {
         return pId;
@@ -105,7 +117,25 @@ public class Product
         this.category = category;
     }
 
-    public Product(int pId, String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category) {
+    public String getProduct_Enable() {
+        return product_Enable;
+    }
+
+    public void setProduct_Enable(String product_Enable) {
+        this.product_Enable = product_Enable;
+    }
+
+    public String getProduct_Approved() {
+        return product_Approved;
+    }
+
+    public void setProduct_Approved(String product_Approved) {
+        this.product_Approved = product_Approved;
+    }
+    
+    
+
+    public Product(int pId, String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved) {
         this.pId = pId;
         this.pName = pName;
         this.pDesc = pDesc;
@@ -116,13 +146,16 @@ public class Product
         this.pQuality = pQuality;
         this.pUsedFor = pUsedFor;
         this.category = category;
+        this.product_Enable = product_Enable;
+        this.product_Approved = product_Approved;
     }
 
     public Product() {
     }
 
-    public Product(String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category) {
+    public Product(String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved) {
         this.pName = pName;
+        
         this.pDesc = pDesc;
         this.pPhoto1 = pPhoto1;
         this.pPhoto2 = pPhoto2;
@@ -131,6 +164,8 @@ public class Product
         this.pQuality = pQuality;
         this.pUsedFor = pUsedFor;
         this.category = category;
+        this.product_Enable = product_Enable;
+        this.product_Approved = product_Approved;
     }
     
     

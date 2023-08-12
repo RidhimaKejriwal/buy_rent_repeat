@@ -1,7 +1,9 @@
 package com.learn.buyrent.servlets;
 
+import com.learn.buyrent.dao.AdminDao;
 import com.learn.buyrent.dao.SellerDao;
 import com.learn.buyrent.dao.UserDao;
+import com.learn.buyrent.entities.Admin;
 import com.learn.buyrent.entities.Seller;
 import com.learn.buyrent.entities.User;
 import com.learn.buyrent.helper.FactoryProvider;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class LoginServlet extends HttpServlet {
 
@@ -25,7 +29,8 @@ public class LoginServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 HttpSession httpsession = request.getSession();
 
-                if (userType.equals("User")) {
+                if (userType.equals("User")) 
+                {
                     UserDao userDao = new UserDao(FactoryProvider.getFactory());
                     User user = userDao.getUserByEmailAndPassword(email, password);
 
@@ -35,10 +40,11 @@ public class LoginServlet extends HttpServlet {
                         return;
                     } else {
                         httpsession.setAttribute("current-user", user);
-                        response.sendRedirect("userDahboard.jsp");
+                        response.sendRedirect("userDashboard.jsp");
                     }
-                }
-                else{
+                } 
+                else if(userType.equals("Seller")) 
+                {
                     SellerDao sellerDao = new SellerDao(FactoryProvider.getFactory());
                     Seller seller = sellerDao.getUserByEmailAndPassword(email, password);
                     if (seller == null) {
@@ -50,8 +56,23 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect("sellerDashboard.jsp");
                     }
 
+                } 
+                else
+                {
+                    AdminDao adminDao = new AdminDao(FactoryProvider.getFactory());
+                    Admin admin = adminDao.getUserByEmailAndPassword(email, password);
+                    if (admin == null) {
+                        httpsession.setAttribute("error_message", "Invalid details !! try again");
+                        response.sendRedirect("login.jsp");
+                        return;
+                    } else {
+                        httpsession.setAttribute("admin-login", admin);
+                        response.sendRedirect("adminDashboard.jsp");
+                    }
                 }
-            } catch (Exception e) {
+            } 
+            catch (Exception e) 
+            {
                 e.printStackTrace();
             }
         }
