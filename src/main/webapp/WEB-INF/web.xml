@@ -20,6 +20,10 @@
         <servlet-name>EditServlet</servlet-name>
         <servlet-class>com.learn.buyrent.servlets.EditServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddProductServlet</servlet-name>
+        <servlet-class>com.learn.buyrent.servlets.AddProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>VerifyServlet</servlet-name>
         <url-pattern>/VerifyServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>EditServlet</servlet-name>
         <url-pattern>/EditServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductServlet</servlet-name>
+        <url-pattern>/AddProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

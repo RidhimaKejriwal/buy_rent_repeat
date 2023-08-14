@@ -2,8 +2,11 @@ package com.learn.buyrent.servlets;
 
 import com.learn.buyrent.entities.Seller;
 import com.learn.buyrent.helper.FactoryProvider;
+import com.learn.buyrent.helper.Helper;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -34,8 +37,8 @@ public class EditServlet extends HttpServlet {
             String city = request.getParameter("user_city");
             System.out.println(name);
             System.out.println(email);
-//            Part part = request.getPart("image");
-//            String pic = part.getSubmittedFileName();
+            Part part = request.getPart("image");
+            String pic = part.getSubmittedFileName();
 
 //            get the user from the session...
             HttpSession session = request.getSession();
@@ -48,20 +51,32 @@ public class EditServlet extends HttpServlet {
             seller.setUserAddress(adress);
             seller.setUserCity(city);
             String oldFile = seller.getUserPic();
-//            seller.setUserPic(pic);
+            seller.setUserPic(pic);
 
-//            String path = request.getRealPath("/") + "img" + File.separator + pic;
-//            System.out.println(path);
-//            String patholdFile = request.getRealPath("/") + "img" + File.separator + oldFile;
-            
+            String path = request.getRealPath("img") + File.separator + "seller" + File.separator + pic;
+            System.out.println(path);
+            //uploading code
+            try {
+                FileOutputStream fos = new FileOutputStream(path);
+                InputStream is = part.getInputStream();
+                //reading data
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                //writing data
+                fos.write(data);
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             Session hibernateSession = FactoryProvider.getFactory().openSession();
             Transaction tx = hibernateSession.beginTransaction();
             hibernateSession.update(seller);
             tx.commit();
             hibernateSession.close();
+            response.sendRedirect("sellerDashboard.jsp");
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

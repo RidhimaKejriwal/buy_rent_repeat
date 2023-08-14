@@ -45,7 +45,7 @@
                                 <table width="100%">
                                     <tr>
                                         <td width="20%">
-                                            <img src="img/default.png" alt="img" style="height: 100px; width: 100px; margin-left: 25px;">
+                                            <img src="img/seller/<%= nseller.getUserPic() %>" alt="img" style="height: 100px; width: 100px; margin-left: 25px;">
                                         </td>
                                         <td>
                                             <table width="100%">

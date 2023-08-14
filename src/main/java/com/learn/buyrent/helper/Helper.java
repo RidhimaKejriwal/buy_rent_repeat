@@ -3,11 +3,12 @@ package com.learn.buyrent.helper;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
-public class Helper 
+public class Helper
 {
-    public static boolean deleteFile(String path)
+    public static boolean deleteFile(String path)throws IOException
     {
         boolean f=false;
         try
