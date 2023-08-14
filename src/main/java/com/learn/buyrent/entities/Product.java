@@ -26,14 +26,13 @@ public class Product
     private Category category;
     private String product_Enable;
     private String product_Approved;
-    @ManyToOne
-    private Seller seller_id;
+    private int seller_id;
 
-    public Seller getSeller_id() {
+    public int getSeller_id() {
         return seller_id;
     }
 
-    public void setSeller_id(Seller seller_id) {
+    public void setSeller_id(int seller_id) {
         this.seller_id = seller_id;
     }
 
@@ -135,7 +134,7 @@ public class Product
     
     
 
-    public Product(int pId, String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved) {
+    public Product(int pId, String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved, int seller_id) {
         this.pId = pId;
         this.pName = pName;
         this.pDesc = pDesc;
@@ -148,12 +147,13 @@ public class Product
         this.category = category;
         this.product_Enable = product_Enable;
         this.product_Approved = product_Approved;
+        this.seller_id = seller_id;
     }
 
     public Product() {
     }
 
-    public Product(String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved) {
+    public Product(String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved, int seller_id) {
         this.pName = pName;
         
         this.pDesc = pDesc;
@@ -166,6 +166,7 @@ public class Product
         this.category = category;
         this.product_Enable = product_Enable;
         this.product_Approved = product_Approved;
+        this.seller_id = seller_id;
     }
     
     

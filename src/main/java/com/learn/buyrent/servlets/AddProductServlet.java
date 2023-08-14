@@ -4,6 +4,7 @@ import com.learn.buyrent.dao.CategoryDao;
 import com.learn.buyrent.dao.ProductDao;
 import com.learn.buyrent.entities.Category;
 import com.learn.buyrent.entities.Product;
+import com.learn.buyrent.entities.Seller;
 import com.learn.buyrent.helper.FactoryProvider;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @MultipartConfig
@@ -33,6 +35,7 @@ public class AddProductServlet extends HttpServlet {
             int pRentPrice = Integer.parseInt(request.getParameter("p_rentprice"));
             int pQuality = Integer.parseInt(request.getParameter("p_quality"));
             int catId = Integer.parseInt(request.getParameter("p_category"));
+            int sellerId = Integer.parseInt(request.getParameter("p_sellerid"));
 
             Part part1 = request.getPart("p_image1");
             Part part2 = request.getPart("p_image2");
@@ -48,6 +51,7 @@ public class AddProductServlet extends HttpServlet {
             p.setpPhoto2(part2.getSubmittedFileName());
             p.setProduct_Approved("no");
             p.setProduct_Enable("yes");
+            p.setSeller_id(sellerId);
 
             //get category by id
             CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
@@ -76,10 +80,10 @@ public class AddProductServlet extends HttpServlet {
                 fos.write(data);
                 fos.close();
                 
-                FileOutputStream fos2 = new FileOutputStream(path1);
+                FileOutputStream fos2 = new FileOutputStream(path2);
                 InputStream is2 = part2.getInputStream();
                 //reading data
-                byte[] data2 = new byte[is.available()];
+                byte[] data2 = new byte[is2.available()];
                 is2.read(data2);
                 //writing data
                 fos2.write(data2);
