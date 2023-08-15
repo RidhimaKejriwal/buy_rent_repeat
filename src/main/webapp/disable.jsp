@@ -4,6 +4,9 @@
     Author     : Dell
 --%>
 
+<%@page import="com.learn.buyrent.helper.Helper"%>
+<%@page import="com.learn.buyrent.entities.Product"%>
+<%@page import="com.learn.buyrent.dao.ProductDao"%>
 <%@page import="com.learn.buyrent.entities.Seller"%>
 <%
     Seller cseller = (Seller) session.getAttribute("current-seller");
@@ -26,6 +29,7 @@
     </head>
     <body onload="makeActive('disable')">
         <%@include file="components/sel_navbar.jsp" %>
+        <%@include file="components/modals.jsp" %>
         <div class="row mt-3 mx-2">
             <!--Menu bar-->
             <div class="col-md-2">
@@ -82,7 +86,43 @@
                 </div>
                 
                 <!--disabled products-->
-                <h1>Disabled products..</h1>
+                <%
+                    ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
+                    List<Product> list = pdao.getAllDisabledSellerProducts(cseller.getUserId());
+                %>
+                
+                <div class="container py-2">
+                    <div class="row" data-masonry='{"percentPosition": true }'>
+                        <%
+                            for (Product product : list) {
+                        %>
+                        <div class="col-md-4">
+                            <div class="card mt-4 product-card">                                
+                                <div class="card-header custom-bg"></div>
+                                <div class="card-body" >
+                                    <div class="container text-center">
+                                        <img src="img/products/<%= product.getpPhoto1() %>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
+                                    </div>
+                                    <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
+                                    <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp">Show more</a></p>
+                                </div>
+                                <div class="card-footer">
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: &#8377 <%= product.getpRentPrice() %><span class="text-secondary rent-duration"> <%= product.getpRentDuration() %> </span></button>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Buy: &#8377 <%= product.getpSellPrice() %></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%
+                            }
+
+                            if (list.size() == 0) {
+                                out.println("<h2>No product available..</h2>");
+                            }
+                        %>
+                    </div>
+                </div>
+                    
             </div>
         </div>
 

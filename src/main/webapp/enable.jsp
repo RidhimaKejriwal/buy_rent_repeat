@@ -31,6 +31,7 @@
     </head>
     <body onload="makeActive('enable')">
         <%@include file="components/sel_navbar.jsp" %>
+        <%@include file="components/modals.jsp" %>
         <div class="row mt-3 mx-2">
             <!--Menu bar-->
             <div class="col-md-2">

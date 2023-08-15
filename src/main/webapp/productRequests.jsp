@@ -3,6 +3,9 @@
     Created on : 12-Aug-2023, 9:34:40 am
     Author     : Dell
 --%>
+<%@page import="com.learn.buyrent.entities.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="com.learn.buyrent.dao.ProductDao"%>
 <%@page import="com.learn.buyrent.helper.FactoryProvider"%>
 <%@page import="com.learn.buyrent.helper.Helper"%>
 <%@page import="java.util.Map"%>
@@ -99,10 +102,53 @@
 
                     </div>
                 </div>
-                            
+
                 <!--Show requests-->
-                
-                
+
+                <%
+                    ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
+                    List<Product> list = pdao.getAllEnabledNotApprovedProducts();
+                %>
+
+                <div class="container py-2">
+                    <div class="row" data-masonry='{"percentPosition": true }'>
+                        <%
+                            for (Product product : list) {
+                        %>
+                        <div class="row" width="100%">
+                            <div class="card mt-4 product-card">                                
+                                <div class="card-body container" style="float: left" >
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="img/products/<%= product.getpPhoto1()%>" style="height: 100px;  width: auto;" class="card-img-top" alt="...">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
+                                            <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp">Show more</a></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px; margin-top: 32px;" class="btn">Rent: &#8377 <%= product.getpRentPrice()%><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
+                                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px; margin-top: 32px;" class="btn">Buy: &#8377 <%= product.getpSellPrice()%></button>
+                                        </div>
+                                        <div class="col-md-2 text-center">
+                                            <button class="btn custom-bg2" style="margin-top: 2vh;">Approve</button>
+                                            <button class="btn custom-bg2" style="margin-top: 2vh;">Reject</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <%
+                            }
+
+                            if (list.size() == 0) {
+                                out.println("<h2>No product available..</h2>");
+                            }
+                        %>
+                    </div>
+                </div>
 
             </div>
         </div>
