@@ -20,6 +20,7 @@ public class Product
     private String pPhoto2;
     private int pSellPrice;
     private int pRentPrice;
+    private String pRentDuration;
     private int pQuality;
     private String pUsedFor;
     @ManyToOne
@@ -92,6 +93,15 @@ public class Product
         this.pRentPrice = pRentPrice;
     }
 
+    public String getpRentDuration() {
+        return pRentDuration;
+    }
+
+    public void setpRentDuration(String pRentDuration) {
+        this.pRentDuration = pRentDuration;
+    }
+
+    
     public int getpQuality() {
         return pQuality;
     }
@@ -134,7 +144,7 @@ public class Product
     
     
 
-    public Product(int pId, String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved, int seller_id) {
+    public Product(int pId, String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, String pRentDuration, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved, int seller_id) {
         this.pId = pId;
         this.pName = pName;
         this.pDesc = pDesc;
@@ -142,6 +152,7 @@ public class Product
         this.pPhoto2 = pPhoto2;
         this.pSellPrice = pSellPrice;
         this.pRentPrice = pRentPrice;
+        this.pRentDuration = pRentDuration;
         this.pQuality = pQuality;
         this.pUsedFor = pUsedFor;
         this.category = category;
@@ -153,7 +164,7 @@ public class Product
     public Product() {
     }
 
-    public Product(String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved, int seller_id) {
+    public Product(String pName, String pDesc, String pPhoto1, String pPhoto2, int pSellPrice, int pRentPrice, String pRentDuration, int pQuality, String pUsedFor, Category category, String product_Enable, String product_Approved, int seller_id) {
         this.pName = pName;
         
         this.pDesc = pDesc;
@@ -161,6 +172,7 @@ public class Product
         this.pPhoto2 = pPhoto2;
         this.pSellPrice = pSellPrice;
         this.pRentPrice = pRentPrice;
+        this.pRentDuration = pRentDuration;
         this.pQuality = pQuality;
         this.pUsedFor = pUsedFor;
         this.category = category;

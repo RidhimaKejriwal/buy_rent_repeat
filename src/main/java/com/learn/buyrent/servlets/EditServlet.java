@@ -39,6 +39,7 @@ public class EditServlet extends HttpServlet {
             System.out.println(email);
             Part part = request.getPart("image");
             String pic = part.getSubmittedFileName();
+            System.out.println(pic);
 
 //            get the user from the session...
             HttpSession session = request.getSession();
@@ -51,7 +52,15 @@ public class EditServlet extends HttpServlet {
             seller.setUserAddress(adress);
             seller.setUserCity(city);
             String oldFile = seller.getUserPic();
-            seller.setUserPic(pic);
+            if(pic.equals(""))
+            {
+                seller.setUserPic("default.png");
+                System.out.println("if block");
+            }
+            else{
+                seller.setUserPic(pic);
+                System.out.println("if block");
+            }
 
             String path = request.getRealPath("img") + File.separator + "seller" + File.separator + pic;
             System.out.println(path);
@@ -74,6 +83,9 @@ public class EditServlet extends HttpServlet {
             hibernateSession.update(seller);
             tx.commit();
             hibernateSession.close();
+            
+            HttpSession httpsession = request.getSession();
+            httpsession.setAttribute("message", "Details successfully updated!!");
             response.sendRedirect("sellerDashboard.jsp");
         }
     }

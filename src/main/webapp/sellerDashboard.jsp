@@ -33,7 +33,7 @@
                     </a>
 
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
-                    <a href="#" class="list-group-item list-group-item-action">Request</a>
+                    <a href="" class="list-group-item list-group-item-action">Request</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Add-product" class="list-group-item list-group-item-action">Add new product</a>
                     <a href="#" class="list-group-item list-group-item-action">Schedule Exchanges</a>
 
@@ -41,6 +41,7 @@
             </div>
             <div class="col-md-10">
                 <!--profile show-->
+                <%@include file="components/message.jsp" %>
                 <div class="container">
                     <div class="row" data-masonry='{"percentPosition": true }'>
                         <div class="card mt-4 product-card">                                
@@ -76,8 +77,8 @@
                 <div class="container">
                     <table class="enable">
                         <tr  class="text-center">
-                            <td style="border: 1px solid; padding: 2px;"><a style="color: black; text-decoration: none;" href="#">Enabled Products</a></td>
-                            <td style="border: 1px solid; padding: 2px;"><a style="color: black; text-decoration: none;" href="#">Disabled Products</a></td>
+                            <td style="border: 1px solid; padding: 2px;"><a id="enable" style="color: #607D8B; text-decoration: none;" href="enable.jsp">Enabled Products</a></td>
+                            <td style="border: 1px solid; padding: 2px;"><a id="disable" style="color: #607D8B; text-decoration: none;" href="disable.jsp">Disabled Products</a></td>
                         </tr>
                     </table>
                 </div>
@@ -156,6 +157,7 @@
                     <div class="modal-body">
                         <div style=""> 
                             <form action="AddProductServlet" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="operation" value="addProduct">
                                 <table class="table">
                                     <tr>
                                         <td>Seller id : </td>
@@ -200,11 +202,21 @@
                                     </tr>
                                     <tr>
                                         <td>Selling Price :</td>
-                                        <td><input type="number" class="form-control" name="p_sellingprice"></td>
+                                        <td><input type="number" class="form-control" name="p_sellingprice" value="0"></td>
                                     </tr>
                                     <tr>
                                         <td>Rent Price :</td>
-                                        <td><input type="number" class="form-control" name="p_rentprice"></td>
+                                        <td><input type="number" class="form-control" name="p_rentprice" value="0"></td>
+                                        <td>
+                                            <select name="p_rentduration">
+                                                <option value="null">None</option>
+                                                <option>per Day</option>                                        
+                                                <option>per Week</option>                                        
+                                                <option>per Month</option>                                        
+                                                <option>for 3 months</option>                                        
+                                                <option>for 6 months</option>                                        
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Quality<span style="color: red">*</span> :</td>

@@ -28,11 +28,34 @@ public class AddProductServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
+            String op = request.getParameter("operation");
+
+            if (op.trim().equals("addcategory")) {
+                //add category
+                //fetching category data
+                String title = request.getParameter("catTitle");
+                String description = request.getParameter("catDescription");
+                Category category = new Category();
+                category.setCategoryTitle(title);
+                category.setCategoryDescription(description);
+
+                //category database save
+                CategoryDao categoryDao = new CategoryDao(FactoryProvider.getFactory());
+                int catId = categoryDao.saveCategory(category);
+
+                //out.println("category saved");
+                HttpSession httpsession = request.getSession();
+                httpsession.setAttribute("message", "Category added successfully!! Category Id: " + catId);
+                response.sendRedirect("adminDashboard.jsp");
+                return;
+
+            }
             String pName = request.getParameter("p_name");
             String pDesc = request.getParameter("p_desc");
             String pUsedFor = request.getParameter("p_usedfor");
             int pSellPrice = Integer.parseInt(request.getParameter("p_sellingprice"));
             int pRentPrice = Integer.parseInt(request.getParameter("p_rentprice"));
+            String prentduration = request.getParameter("p_rentduration");
             int pQuality = Integer.parseInt(request.getParameter("p_quality"));
             int catId = Integer.parseInt(request.getParameter("p_category"));
             int sellerId = Integer.parseInt(request.getParameter("p_sellerid"));
@@ -46,6 +69,7 @@ public class AddProductServlet extends HttpServlet {
             p.setpUsedFor(pUsedFor);
             p.setpSellPrice(pSellPrice);
             p.setpRentPrice(pRentPrice);
+            p.setpRentDuration(prentduration);
             p.setpQuality(pQuality);
             p.setpPhoto1(part1.getSubmittedFileName());
             p.setpPhoto2(part2.getSubmittedFileName());
@@ -61,7 +85,7 @@ public class AddProductServlet extends HttpServlet {
             // product save in database-----
             ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
             pdao.saveProduct(p);
-            out.println("Product save success");
+//            out.println("Product save success");
 
             // pic upload-----
             // find out the path to upload file
@@ -92,7 +116,10 @@ public class AddProductServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            out.println("Product saved");
+//            out.println("Product saved");
+            HttpSession httpsession = request.getSession();
+            httpsession.setAttribute("message", "Your product request has been sent to the admin. You will soon receive confirmation mail.");
+            response.sendRedirect("sellerDashboard.jsp");
         }
     }
 

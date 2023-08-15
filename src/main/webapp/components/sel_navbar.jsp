@@ -1,6 +1,8 @@
+<%@page import="com.learn.buyrent.entities.Admin"%>
 <%@page import="com.learn.buyrent.entities.Seller"%>
 <%
     Seller seller1 = (Seller) session.getAttribute("current-seller");
+    Admin admin1 = (Admin) session.getAttribute("admin-login");
 %>
 
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
@@ -22,9 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link active alink" href="#donate">Donate</a>
                 </li>
-            <%
-                if (seller1 == null) {
-            %>
+                <%
+                    if (seller1 == null && admin1 == null) {
+                %>
                 <li class="nav-item">
                     <a class="nav-link active alink" href="login.jsp"> <i class="fa fa-user-circle"></i> Login</a>
                 </li>
@@ -32,13 +34,23 @@
                     <a class="nav-link active alink" href="register.jsp"> <i class="fa fa-user-plus"></i> Register</a>
                 </li>
                 <%
-                    }
-                    else
-                    {
+                } else if (seller1 != null && admin1 == null) {
+                %>
+
+                <li class="nav-item active">
+                    <a class="nav-link active" href="sellerDashboard.jsp"> <i class="fa fa-user-circle"></i> <%= seller1.getUserName()%></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" href="LogoutServlet">Logout</a>
+                </li>
+
+                <%
+                } else {
+
                 %>
                 
                 <li class="nav-item active">
-                    <a class="nav-link active" href="sellerDashboard.jsp"> <i class="fa fa-user-circle"></i> <%= seller1.getUserName() %></a>
+                    <a class="nav-link active" href="sellerDashboard.jsp"> <i class="fa fa-user-circle"></i> ADMIN </a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link active" href="LogoutServlet">Logout</a>
@@ -47,8 +59,9 @@
                 <%
                     }
                 %>
-                
-                
+
+
+
             </ul>
         </div>
     </div>

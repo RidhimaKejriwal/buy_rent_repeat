@@ -1,5 +1,5 @@
 <%-- 
-    Document   : adminDashboard
+    Document   : productRequests
     Created on : 12-Aug-2023, 9:34:40 am
     Author     : Dell
 --%>
@@ -99,6 +99,10 @@
 
                     </div>
                 </div>
+                            
+                <!--Show requests-->
+                
+                
 
             </div>
         </div>
