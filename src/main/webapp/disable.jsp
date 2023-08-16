@@ -84,31 +84,41 @@
                         </tr>
                     </table>
                 </div>
-                
+
                 <!--disabled products-->
                 <%
                     ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
-                    List<Product> list = pdao.getAllDisabledSellerProducts(cseller.getUserId());
+                    List<Product> list = pdao.getAllDisabledApprovedSellerProducts(cseller.getUserId());
                 %>
-                
+
                 <div class="container py-2">
                     <div class="row" data-masonry='{"percentPosition": true }'>
                         <%
                             for (Product product : list) {
+                                String sellprice = pdao.getSellingPrice(product.getpSellPrice());
+                                String rentprice = pdao.getRentPrice(product.getpRentPrice());
                         %>
                         <div class="col-md-4">
                             <div class="card mt-4 product-card">                                
                                 <div class="card-header custom-bg"></div>
                                 <div class="card-body" >
                                     <div class="container text-center">
-                                        <img src="img/products/<%= product.getpPhoto1() %>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
+                                        <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
                                     </div>
                                     <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
                                     <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp">Show more</a></p>
                                 </div>
                                 <div class="card-footer">
-                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: &#8377 <%= product.getpRentPrice() %><span class="text-secondary rent-duration"> <%= product.getpRentDuration() %> </span></button>
-                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Buy: &#8377 <%= product.getpSellPrice() %></button>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: <%= rentprice%><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
+                                    <%
+                                        if (sellprice.equals("not for sale")) {
+                                    %>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <span class="text-secondary rent-duration"> <%= sellprice%> </span></button>
+                                    <%
+                                    } else {
+                                    %>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <%= sellprice%></button>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +132,7 @@
                         %>
                     </div>
                 </div>
-                    
+
             </div>
         </div>
 

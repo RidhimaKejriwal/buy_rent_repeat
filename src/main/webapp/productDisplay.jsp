@@ -4,6 +4,8 @@
     Author     : Dell
 --%>
 
+<%@page import="com.learn.buyrent.helper.FactoryProvider"%>
+<%@page import="com.learn.buyrent.dao.ProductDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +14,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%
+            int product_Id = Integer.parseInt(request.getParameter("product_id"));
+            ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
+            Post p = d.getPostByPostId(postId);
+        %>
     </body>
 </html>

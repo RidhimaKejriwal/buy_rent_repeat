@@ -209,7 +209,7 @@
                                         <td><input type="number" class="form-control" name="p_rentprice" value="0"></td>
                                         <td>
                                             <select name="p_rentduration">
-                                                <option value="null">None</option>
+                                                <option value="">None</option>
                                                 <option>per Day</option>                                        
                                                 <option>per Week</option>                                        
                                                 <option>per Month</option>                                        

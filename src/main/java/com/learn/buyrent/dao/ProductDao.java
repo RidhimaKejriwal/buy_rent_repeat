@@ -40,18 +40,19 @@ public class ProductDao {
         return f;
     }
     
-    //get seller products by sellerid
-    public List<Product> getAllEnabledSellerProducts(int sid)
+    //get all enabled approved seller products of sellerid
+    public List<Product> getAllEnabledApprovedSellerProducts(int sid)
     {
         Session s = this.factory.openSession();
-        Query query = s.createQuery("from Product where seller_id =: id and product_Enable =: e");
+        Query query = s.createQuery("from Product where seller_id =: id and product_Enable =: e and product_Approved =: a");
         query.setParameter("id", sid);
         query.setParameter("e", "yes");
+        query.setParameter("a", "yes");
         List<Product> list = query.list();
         return list;        
     }
     
-    //get all enabled products 
+    //get all enabled but not approved products 
     public List<Product> getAllEnabledNotApprovedProducts()
     {
         Session s = this.factory.openSession();
@@ -62,13 +63,55 @@ public class ProductDao {
         return list;        
     }
     
-    public List<Product> getAllDisabledSellerProducts(int sid)
+    //get all disabled but approved seller products of sellerid
+    public List<Product> getAllDisabledApprovedSellerProducts(int sid)
     {
         Session s = this.factory.openSession();
-        Query query = s.createQuery("from Product where seller_id =: id and product_Enable =: e");
+        Query query = s.createQuery("from Product where seller_id =: id and product_Enable =: e and product_Approved =: a");
         query.setParameter("id", sid);
         query.setParameter("e", "no");
+        query.setParameter("a", "yes");
         List<Product> list = query.list();
         return list;        
+    }
+    
+     //get all enabled approved products of all sellers
+    public List<Product> getAllEnabledApprovedProducts()
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from Product where product_Enable =: e and product_Approved =: a");
+        query.setParameter("e", "yes");
+        query.setParameter("a", "yes");
+        List<Product> list = query.list();
+        return list;        
+    }
+    
+    public String getSellingPrice(int sellingPrice)
+    {
+        String price = "";
+        if(sellingPrice == 0)
+        {
+            price = price + "not for sale";
+            return price;
+        }
+        else
+        {
+            price = price + " &#8377 " + sellingPrice;
+            return price;
+        }
+    }
+    public String getRentPrice(int RentPrice)
+    {
+        String price = "";
+        if(RentPrice == 0)
+        {
+            price = price + "not for rent";
+            return price;
+        }
+        else
+        {
+            price = price + " &#8377 " + RentPrice;
+            return price;
+        }
     }
 }

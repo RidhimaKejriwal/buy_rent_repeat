@@ -1,3 +1,6 @@
+<%@page import="com.learn.buyrent.helper.Helper"%>
+<%@page import="com.learn.buyrent.entities.Product"%>
+<%@page import="com.learn.buyrent.dao.ProductDao"%>
 <%@page import="com.learn.buyrent.entities.Category"%>
 <%@page import="java.util.List"%>
 <%@page import="com.learn.buyrent.dao.CategoryDao"%>
@@ -14,10 +17,9 @@
     </head>
     <body>
         <%@include file="components/navbar.jsp" %>
-        <%
-//            out.println(FactoryProvider.getFactory());
-                CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
-                List<Category> list1 = cdao.getCategories();
+        <%//            out.println(FactoryProvider.getFactory());
+            CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
+            List<Category> list1 = cdao.getCategories();
         %>
         <div>
             <table class="table table-dark table-striped-columns" style="width: 100%; border: 1px solid black;" >
@@ -25,9 +27,9 @@
                     <%
                         for (Category category : list1) {
                     %>
-                    
-                    <td><%= category.getCategoryTitle() %></td>
-                    
+
+                    <td><%= category.getCategoryTitle()%></td>
+
                     <%
                         }
                     %>
@@ -55,7 +57,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!--features-->
         <div class="container-fluid" style="background-color: lightcyan; padding-top: 20px;"  >
             <div class="row" >
@@ -81,12 +83,56 @@
                 </div>
             </div>
         </div>
-        
+
         <!--browse products-->
-        <div class="container">
-            <h1>Under Construction!</h1>
+        <%
+            ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
+            List<Product> list = pdao.getAllEnabledApprovedProducts();
+        %>
+
+        <div class="container py-2">
+            <div class="row" data-masonry='{"percentPosition": true }'>
+                <%
+                    for (Product product : list) {
+                    String sellprice = pdao.getSellingPrice(product.getpSellPrice());
+                    String rentprice = pdao.getRentPrice(product.getpRentPrice());
+                %>
+                <div class="col-md-4">
+                    <div class="card mt-4 product-card">                                
+                        <div class="card-header custom-bg"></div>
+                        <div class="card-body" >
+                            <div class="container text-center">
+                                <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
+                            </div>
+                            <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
+                            <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId() %>">Show more</a></p>
+                        </div>
+                        <div class="card-footer">
+                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: <%= rentprice %><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
+                            <%
+                                if(sellprice.equals("not for sale"))
+                                {
+                            %>
+                              <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <span class="text-secondary rent-duration"> <%= sellprice%> </span></button>
+                            <%
+                            } else{
+                            %>
+                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <%= sellprice %></button>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <%
+                    }
+
+                    if (list.size() == 0) {
+                        out.println("<h2>No product available..</h2>");
+                    }
+                %>
+            </div>
         </div>
-        
+
         <!--donate poster-->
         <div id="donate" class="container-fluid" style="background-color: #1e4040">
             <div class="row mt-4 mb-3">
@@ -100,7 +146,7 @@
                         <a href="donate.jsp"><button type='button' class="btn custom-bg2">Donate Now!</button></a>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </body>
