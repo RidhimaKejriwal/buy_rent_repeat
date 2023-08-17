@@ -1,5 +1,6 @@
 package com.learn.buyrent.helper;
 
+import com.learn.buyrent.entities.Product;
 import com.learn.buyrent.helper.GmailSender;
 import com.learn.buyrent.entities.User;
 import com.learn.buyrent.entities.Seller;
@@ -33,6 +34,28 @@ public class SendMail {
         String from = "requestrentrepeat@gmail.com";
         String subject = "Seller verification Email";
         String text = "Registration successful!! Please verify your account using this code: " + seller.getUserCode();
+        boolean b = gmail.sendEmail(to, from, subject, text);
+        return b;
+    }
+    
+    public boolean productApprovedMail(Seller seller, Product product)
+    {
+        GmailSender gmail = new GmailSender();
+        String to = seller.getUserEmail();
+        String from = "requestrentrepeat@gmail.com";
+        String subject = "Product Registration Approved";
+        String text = "Greetings "+seller.getUserName()+"! Your product "+product.getpName()+" with Product id: "+product.getpId()+" has been approved by the admin.";
+        boolean b = gmail.sendEmail(to, from, subject, text);
+        return b;
+    }
+    
+    public boolean productRejectedMail(Seller seller, Product product)
+    {
+        GmailSender gmail = new GmailSender();
+        String to = seller.getUserEmail();
+        String from = "requestrentrepeat@gmail.com";
+        String subject = "Product Registration Rejected";
+        String text = "Greetings "+seller.getUserName()+"! Your product "+product.getpName()+" with Product id: "+product.getpId()+" has been rejected by the admin.";
         boolean b = gmail.sendEmail(to, from, subject, text);
         return b;
     }

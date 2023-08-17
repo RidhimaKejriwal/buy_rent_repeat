@@ -2,8 +2,11 @@
 package com.learn.buyrent.servlets;
 
 import com.learn.buyrent.dao.ProductDao;
+import com.learn.buyrent.dao.SellerDao;
 import com.learn.buyrent.entities.Product;
+import com.learn.buyrent.entities.Seller;
 import com.learn.buyrent.helper.FactoryProvider;
+import com.learn.buyrent.helper.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -23,12 +26,14 @@ public class ApproveServlet extends HttpServlet {
             String op = request.getParameter("op");
             ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
             Product product = pdao.getProductbyId(product_Id);
+            SellerDao sdao = new SellerDao(FactoryProvider.getFactory());
+            Seller seller = sdao.getUserById(product.getSeller_id());
+            
             if(op.equals("approve"))
             {
                 product.setProduct_Approved("yes");
             }
-            else if(op.equals("reject"))
-            {
+            else{
                 product.setProduct_Approved("no");
             }
             
@@ -37,6 +42,17 @@ public class ApproveServlet extends HttpServlet {
             hibernateSession.update(product);
             tx.commit();
             hibernateSession.close();
+            
+            SendMail sm = new SendMail();
+            if(op.equals("approve"))
+            {
+                
+            }
+            else
+            {
+                
+            }
+            
             response.sendRedirect("productRequests.jsp");
         }
     }
