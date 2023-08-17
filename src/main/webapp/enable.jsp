@@ -108,7 +108,7 @@
                                         <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
                                     </div>
                                     <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
-                                    <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp">Show more</a></p>
+                                    <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId() %>">Show more</a></p>
                                 </div>
                                 <div class="card-footer">
                                     <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: <%= rentprice %><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>

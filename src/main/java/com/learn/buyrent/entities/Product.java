@@ -180,6 +180,11 @@ public class Product
         this.product_Approved = product_Approved;
         this.seller_id = seller_id;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "pId=" + pId + ", pName=" + pName + ", pDesc=" + pDesc + ", pPhoto1=" + pPhoto1 + ", pPhoto2=" + pPhoto2 + ", pSellPrice=" + pSellPrice + ", pRentPrice=" + pRentPrice + ", pRentDuration=" + pRentDuration + ", pQuality=" + pQuality + ", pUsedFor=" + pUsedFor + ", category=" + category + ", product_Enable=" + product_Enable + ", product_Approved=" + product_Approved + ", seller_id=" + seller_id + '}';
+    }
     
     
 }

@@ -28,6 +28,10 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.learn.buyrent.servlets.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ApproveServlet</servlet-name>
+        <servlet-class>com.learn.buyrent.servlets.ApproveServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>VerifyServlet</servlet-name>
         <url-pattern>/VerifyServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveServlet</servlet-name>
+        <url-pattern>/ApproveServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

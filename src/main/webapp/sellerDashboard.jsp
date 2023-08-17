@@ -171,7 +171,7 @@
                                         <td>Category<span style="color: red">*</span> : </td>
                                         <td>
                                             <select name="p_category" required>
-                                                <option>Other</option>
+                                                <option value="0">Other</option>
                                                 <%
                                                     for (Category category : list1) {
                                                 %>
@@ -222,11 +222,11 @@
                                         <td>Quality<span style="color: red">*</span> :</td>
                                         <td>
                                             <select name="p_quality" required>
-                                                <option value="1">1 (Excellent)</option>                                        
-                                                <option value="2">2 (Very Good)</option>                                        
+                                                <option value="5">5 (Excellent)</option>                                        
+                                                <option value="4">4 (Very Good)</option>                                        
                                                 <option value="3">3 (Good)</option>                                        
-                                                <option value="4">4 (Average)</option>                                        
-                                                <option value="5">5 (Poor)</option>                                        
+                                                <option value="2">2 (Average)</option>                                        
+                                                <option value="1">1 (Poor)</option>                                        
                                             </select>
                                         </td>
                                     </tr>

@@ -114,4 +114,24 @@ public class ProductDao {
             return price;
         }
     }
+    
+    public Product getProductbyId(int pid)
+    {
+        Product product = new Product();
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from Product where pId =: p");
+        query.setParameter("p", pid);
+        product = (Product)query.uniqueResult();
+        return product;
+    }
+    
+    public String getStars(int quality)
+    {
+        String stars = "";
+        for(int i=0; i<quality; i++)
+        {
+            stars = stars + " " + "\u2B50";
+        }
+        return stars;
+    }
 }

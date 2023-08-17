@@ -58,4 +58,26 @@ public class SellerDao {
         
         return seller;
     }
+    
+    public Seller getUserById(int sid)
+    {
+        Seller seller = null;
+        
+        try
+        {
+            String query = "from Seller where userId =: id ";
+            Session session1 = this.factory.openSession();
+            Query q = session1.createQuery(query);
+            q.setParameter("id", sid);
+            seller = (Seller) q.uniqueResult();
+            session1.close();
+            
+            
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return seller;
+    }
 }

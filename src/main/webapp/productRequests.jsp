@@ -114,6 +114,8 @@
                     <div class="row" data-masonry='{"percentPosition": true }'>
                         <%
                             for (Product product : list) {
+                                String sellprice = pdao.getSellingPrice(product.getpSellPrice());
+                                String rentprice = pdao.getRentPrice(product.getpRentPrice());
                         %>
                         <div class="row" width="100%">
                             <div class="card mt-4 product-card">                                
@@ -122,20 +124,27 @@
                                         <div class="col-md-2">
                                             <img src="img/products/<%= product.getpPhoto1()%>" style="height: 100px;  width: auto;" class="card-img-top" alt="...">
                                         </div>
-                                        <div class="col-md-4">
-                                            <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
-                                            <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp">Show more</a></p>
+                                        <div class="col-md-4" style="padding-left: 10px;">
+                                            <h5 style="padding-left: 10px;" class="card-title mt-3"> <%= product.getpName()%></h5>
+                                            <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
                                         </div>
                                         <div class="col-md-4">
-                                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px; margin-top: 32px;" class="btn">Rent: &#8377 <%= product.getpRentPrice()%><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
-                                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px; margin-top: 32px;" class="btn">Buy: &#8377 <%= product.getpSellPrice()%></button>
+                                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px; margin-top: 32px;" class="btn">Rent: <%= rentprice%><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
+                                            <%
+                                                if (sellprice.equals("not for sale")) {
+                                            %>
+                                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px; margin-top: 32px;" class="btn"> Buy: <span class="text-secondary rent-duration"> <%= sellprice%> </span></button>
+                                            <%
+                                            } else {
+                                            %>
+                                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px; margin-top: 32px;" class="btn"> Buy: <%= sellprice%></button>
+                                            <% }%>
                                         </div>
                                         <div class="col-md-2 text-center">
-                                            <button class="btn custom-bg2" style="margin-top: 2vh;">Approve</button>
-                                            <button class="btn custom-bg2" style="margin-top: 2vh;">Reject</button>
+                                            <a href="ApproveServlet?product_id=<%= product.getpId()%>&op=approve"><button class="btn custom-bg2" style="margin-top: 2vh;">Approve</button><a>
+                                            <a href="ApproveServlet?product_id=<%= product.getpId()%>&op=reject"><button class="btn custom-bg2" style="margin-top: 2vh;">Reject</button></a>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

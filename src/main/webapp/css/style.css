@@ -74,7 +74,13 @@ h3,p{
 }
 
 .product-card{
-    border: 1px solid #ef0078;
+    border: 1px solid darkgrey;
+    padding: 5px;
+}
+
+.product-card1{
+    border: 1px solid darkgrey;
+    padding: 5px;
 }
 
 .product-card:hover
