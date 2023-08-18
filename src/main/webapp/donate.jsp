@@ -11,7 +11,7 @@
     <body>
         <%@include file="components/navbar.jsp" %>
         <div id="donate" class="container-fluid" style="background-color: #1e4040; margin-top:0px;">
-            <div class="row mt-4 mb-3">
+            <div class="row  mb-3">
                 <div class="col">
                     <img src="img/donate.png" style="height: 400px; width: 550px;;" alt="img..">
                 </div>
@@ -19,10 +19,10 @@
                     <h1 style="color: white; text-align: center">Give your unused stuff for the <b style="color: cyan">happiness</b> of others.</h1>
                     <h3 style="text-align: center; color: white">Give a little, Help a lot!</h3>
                     <div style="justify-content: center; align-items: center; display: flex; margin-top: 40px;" >
-                        <button type='button' class="btn custom-bg2">Donate Now!</button>
+                        <button  type='button' class="btn custom-bg2">Register NGO!</button>
                     </div>
                 </div>
-                
             </div>
+        </div>
     </body>
 </html>

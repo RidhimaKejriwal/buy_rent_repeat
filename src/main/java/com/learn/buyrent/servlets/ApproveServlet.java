@@ -29,12 +29,19 @@ public class ApproveServlet extends HttpServlet {
             SellerDao sdao = new SellerDao(FactoryProvider.getFactory());
             Seller seller = sdao.getUserById(product.getSeller_id());
             
+            SendMail sm = new SendMail();
+            
             if(op.equals("approve"))
             {
                 product.setProduct_Approved("yes");
+                boolean b = sm.productApprovedMail(seller, product);
+                System.out.println("approved");
             }
             else{
                 product.setProduct_Approved("no");
+                product.setProduct_Enable("no");
+                boolean b = sm.productRejectedMail(seller, product);
+                System.out.println("rejected");
             }
             
             Session hibernateSession = FactoryProvider.getFactory().openSession();
@@ -43,15 +50,33 @@ public class ApproveServlet extends HttpServlet {
             tx.commit();
             hibernateSession.close();
             
-            SendMail sm = new SendMail();
-            if(op.equals("approve"))
-            {
-                
-            }
-            else
-            {
-                
-            }
+            
+//            if(op.equals("approve"))
+//            {
+//                System.out.println("if block");
+//                boolean b = sm.productApprovedMail(seller, product);
+//                if(b)
+//                {
+//                    response.sendRedirect("productRequests.jsp");
+//                }
+//                else
+//                {
+//                    System.out.println("problem in sending mail");
+//                }
+//            }
+//            else
+//            {
+//                System.out.println("else block");
+//                boolean b = sm.productRejectedMail(seller, product);
+//                if(b)
+//                {
+//                    response.sendRedirect("productRequests.jsp");
+//                }
+//                else
+//                {
+//                    System.out.println("problem in sending mail");
+//                }
+//            }
             
             response.sendRedirect("productRequests.jsp");
         }

@@ -13,6 +13,7 @@ public class NGO {
     private String cause;
     private String city;
     private String state;
+    private String address;
     private String photo;
     private String description;
     private String link;

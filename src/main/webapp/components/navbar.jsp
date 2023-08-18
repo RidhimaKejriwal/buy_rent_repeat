@@ -25,6 +25,12 @@
                 <li class="nav-item">
                     <a class="nav-link active alink" href="register.jsp"> <i class="fa fa-user-plus"></i> Register</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active alink" href="guide.jsp">Guide</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active alink" href="#donate">Donate</a>
+                </li>
                 <%
                     }
                     else
@@ -37,17 +43,17 @@
                 <li class="nav-item active">
                     <a class="nav-link active" href="LogoutServlet">Logout</a>
                 </li>
-                
-                <%
-                    }
-                %>
-                
                 <li class="nav-item">
                     <a class="nav-link active alink" href="guide.jsp">Guide</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active alink" href="#donate">Donate</a>
+                    <a class="nav-link active alink" href="donate.jsp">Donate</a>
                 </li>
+                <%
+                    }
+                %>
+                
+                
             </ul>
         </div>
     </div>

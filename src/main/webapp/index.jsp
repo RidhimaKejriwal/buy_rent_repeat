@@ -93,9 +93,14 @@
         <div class="container py-2">
             <div class="row" data-masonry='{"percentPosition": true }'>
                 <%
-                    for (Product product : list) {
-                    String sellprice = pdao.getSellingPrice(product.getpSellPrice());
-                    String rentprice = pdao.getRentPrice(product.getpRentPrice());
+                        int j;
+                        if(list.size()>6){ j = 6;
+                    }else{ j = list.size();}
+//                    for (Product product : list) {
+                        for (int i = 0; i < j; i++) {
+                        Product product = list.get(i);
+                            String sellprice = pdao.getSellingPrice(product.getpSellPrice());
+                            String rentprice = pdao.getRentPrice(product.getpRentPrice());
                 %>
                 <div class="col-md-4">
                     <div class="card mt-4 product-card">                                
@@ -105,37 +110,37 @@
                                 <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
                             </div>
                             <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
-                            <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId() %>">Show more</a></p>
+                            <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
                         </div>
                         <div class="card-footer">
-                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: <%= rentprice %><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
+                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: <%= rentprice%><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
                             <%
-                                if(sellprice.equals("not for sale"))
-                                {
+                                if (sellprice.equals("not for sale")) {
                             %>
-                              <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <span class="text-secondary rent-duration"> <%= sellprice%> </span></button>
+                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <span class="text-secondary rent-duration"> <%= sellprice%> </span></button>
                             <%
-                            } else{
+                            } else {
                             %>
-                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <%= sellprice %></button>
+                            <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <%= sellprice%></button>
                             <% } %>
                         </div>
                     </div>
                 </div>
 
                 <%
-                    }
+                        }
 
-                    if (list.size() == 0) {
-                        out.println("<h2>No product available..</h2>");
-                    }
+                        if (list.size() == 0) {
+                            out.println("<h2>No product available..</h2>");
+                        }
+//                    }
                 %>
             </div>
         </div>
 
         <!--donate poster-->
         <div id="donate" class="container-fluid" style="background-color: #1e4040">
-            <div class="row mt-4 mb-3">
+            <div class="row mt-4">
                 <div class="col">
                     <img src="img/donate.png" style="height: 400px; width: 550px;;" alt="img..">
                 </div>
@@ -148,6 +153,11 @@
                 </div>
 
             </div>
+        </div>
+        
+        <!--footer-->
+        <div class="container-fluid text-center" style="background-color: #1e4040">
+            <h5 style="margin-bottom: 0; color: white;">Contact us at : requestrentrepeat@gmail.com</h5>
         </div>
     </body>
 </html>
