@@ -1,20 +1,24 @@
-
 package com.learn.buyrent.servlets;
 
+import com.learn.buyrent.dao.NGODao;
 import com.learn.buyrent.entities.NGO;
+import com.learn.buyrent.helper.FactoryProvider;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @MultipartConfig
 public class AddNGOServlet extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -29,9 +33,9 @@ public class AddNGOServlet extends HttpServlet {
             String State = request.getParameter("state");
             String City = request.getParameter("city");
             String Link = request.getParameter("link");
-            
+
             Part part = request.getPart("photo");
-            
+
             NGO ngo = new NGO();
             ngo.setName(Name);
             ngo.setEmail(Email);
@@ -43,6 +47,28 @@ public class AddNGOServlet extends HttpServlet {
             ngo.setCity(City);
             ngo.setLink(Link);
             ngo.setPhoto(part.getSubmittedFileName());
+
+            NGODao ndao = new NGODao(FactoryProvider.getFactory());
+            ndao.ngoSave(ngo);
+
+            String path = request.getRealPath("img") + File.separator + "ngo" + File.separator + part.getSubmittedFileName();
+
+            try {
+                FileOutputStream fos = new FileOutputStream(path);
+                InputStream is = part.getInputStream();
+                //reading data
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                //writing data
+                fos.write(data);
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            HttpSession httpsession = request.getSession();
+            httpsession.setAttribute("message", "Your NGO has been registered.");
+            response.sendRedirect("donate.jsp");
         }
     }
 

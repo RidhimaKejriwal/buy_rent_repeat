@@ -29,26 +29,24 @@
             </div>
         </div>
 
-        <%
-            NGODao ndao = new NGODao(FactoryProvider.getFactory());
+        <%@include file="components/message.jsp" %>
+        <%            NGODao ndao = new NGODao(FactoryProvider.getFactory());
             List<NGO> list1 = ndao.getallNGOs();
         %>
         <div>
-            <table class="table table-dark table-striped-columns" style="width: 100%; border: 1px solid black;" >
+            <table class="table table-success table-striped-columns" style="width: 100%; border: 1px solid black;" >
+                <%
+                    for (NGO ngo : list1) {
+                %>
                 <tr align="center">
-                    <%
-                        for (NGO ngo : list1) {
-                    %>
-
-                    <td><a href="<%= ngo.getLink() %>"><%= ngo.getName() %></a></td>
-
-                    <%
-                        }
-                    %>
+                    <td><a href="<%= ngo.getLink()%>"><%= ngo.getName()%></a></td>
                 </tr>
+                <%
+                    }
+                %>
             </table>
         </div>
-        
+
         <!--Register NGO-->
         <div class="modal fade" id="Add-NGO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -91,16 +89,16 @@
                                         <td><input type="text" class="form-control" name="address" required></td>
                                     </tr>
                                     <tr>
-                                        <td>State<span style="color: red">*</span> :</td>
-                                        <td><input type="text" class="form-control" name="state" required></td>
+                                        <td>State :</td>
+                                        <td><input type="text" class="form-control" name="state"></td>
                                     </tr>
                                     <tr>
-                                        <td>City<span style="color: red">*</span> :</td>
-                                        <td><input type="text" class="form-control" name="state" required></td>
+                                        <td>City :</td>
+                                        <td><input type="text" class="form-control" name="state" ></td>
                                     </tr>
                                     <tr>
-                                        <td>Link<span style="color: red">*</span> :</td>
-                                        <td><input type="text" class="form-control" name="link" required></td>
+                                        <td>Link :</td>
+                                        <td><input type="text" class="form-control" name="link"></td>
                                     </tr>
                                 </table>
                                 <div class="container">

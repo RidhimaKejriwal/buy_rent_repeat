@@ -1,5 +1,6 @@
 package com.learn.buyrent.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class NGO {
     private String state;
     private String address;
     private String photo;
+    @Column(length = 3000)
     private String description;
     private String link;
 
