@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="com.learn.buyrent.helper.FactoryProvider"%>
+<%@page import="com.learn.buyrent.dao.NGODao"%>
+<%@page import="com.learn.buyrent.entities.NGO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,10 +23,95 @@
                     <h1 style="color: white; text-align: center">Give your unused stuff for the <b style="color: cyan">happiness</b> of others.</h1>
                     <h3 style="text-align: center; color: white">Give a little, Help a lot!</h3>
                     <div style="justify-content: center; align-items: center; display: flex; margin-top: 40px;" >
-                        <button  type='button' class="btn custom-bg2">Register NGO!</button>
+                        <button data-bs-toggle="modal" data-bs-target="#Add-NGO" type='button' class="btn custom-bg2">Register NGO!</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <%
+            NGODao ndao = new NGODao(FactoryProvider.getFactory());
+            List<NGO> list1 = ndao.getallNGOs();
+        %>
+        <div>
+            <table class="table table-dark table-striped-columns" style="width: 100%; border: 1px solid black;" >
+                <tr align="center">
+                    <%
+                        for (NGO ngo : list1) {
+                    %>
+
+                    <td><a href="<%= ngo.getLink() %>"><%= ngo.getName() %></a></td>
+
+                    <%
+                        }
+                    %>
+                </tr>
+            </table>
+        </div>
+        
+        <!--Register NGO-->
+        <div class="modal fade" id="Add-NGO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header custom-bg text-center text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Add Product </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style=""> 
+                            <form action="AddNGOServlet" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="operation" value="addProduct">
+                                <table class="table">
+                                    <tr>
+                                        <td>Organization Name<span style="color: red">*</span> : </td>
+                                        <td><input type="text" class="form-control" name="name" required></td>
+                                    </tr> 
+                                    <tr>
+                                        <td>Cause<span style="color: red">*</span> : </td>
+                                        <td><input type="text" class="form-control" name="cause" required></td>
+                                    </tr> 
+                                    <tr>
+                                        <td>Description<span style="color: red">*</span> : </td>
+                                        <td><input type="text" class="form-control" name="description" required></td>
+                                    </tr> 
+                                    <tr>
+                                        <td>Email <span style="color: red">*</span> :</td>
+                                        <td><input type="text" class="form-control" name="email" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone <span style="color: red">*</span> :</td>
+                                        <td><input type="text" class="form-control" name="phone" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Photo <span style="color: red">*</span> :</td>
+                                        <td><input type="file" class="form-control" name="photo" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address<span style="color: red">*</span> :</td>
+                                        <td><input type="text" class="form-control" name="address" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>State<span style="color: red">*</span> :</td>
+                                        <td><input type="text" class="form-control" name="state" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>City<span style="color: red">*</span> :</td>
+                                        <td><input type="text" class="form-control" name="state" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Link<span style="color: red">*</span> :</td>
+                                        <td><input type="text" class="form-control" name="link" required></td>
+                                    </tr>
+                                </table>
+                                <div class="container">
+                                    <button type="submit" class="btn custom-bg text-white">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

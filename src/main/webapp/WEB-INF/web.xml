@@ -32,6 +32,10 @@
         <servlet-name>ApproveServlet</servlet-name>
         <servlet-class>com.learn.buyrent.servlets.ApproveServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNGOServlet</servlet-name>
+        <servlet-class>com.learn.buyrent.servlets.AddNGOServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>VerifyServlet</servlet-name>
         <url-pattern>/VerifyServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ApproveServlet</servlet-name>
         <url-pattern>/ApproveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNGOServlet</servlet-name>
+        <url-pattern>/AddNGOServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

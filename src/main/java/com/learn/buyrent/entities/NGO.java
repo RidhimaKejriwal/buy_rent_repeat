@@ -1,11 +1,14 @@
 package com.learn.buyrent.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class NGO {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int did;
     private String name;
     private String phone;
@@ -73,6 +76,16 @@ public class NGO {
     public void setState(String state) {
         this.state = state;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
 
     public String getPhoto() {
         return photo;
