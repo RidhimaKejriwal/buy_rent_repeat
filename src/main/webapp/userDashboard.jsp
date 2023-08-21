@@ -1,3 +1,8 @@
+<%@page import="com.learn.buyrent.helper.Helper"%>
+<%@page import="com.learn.buyrent.entities.Product"%>
+<%@page import="com.learn.buyrent.helper.FactoryProvider"%>
+<%@page import="java.util.List"%>
+<%@page import="com.learn.buyrent.dao.ProductDao"%>
 <%@page import="com.learn.buyrent.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -17,6 +22,7 @@
         <link rel="stylesheet" href="css/style.css">
         <script src="js/script.js" ></script>
         <%@include file="components/common_css_js.jsp" %>
+        <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
     </head>
     <body>
         <%@include file="components/navbar.jsp" %>
@@ -26,7 +32,7 @@
                     <a href="" class="list-group-item list-group-item-action active custom-bg " style="border: #ef0078" aria-current="true">Menu</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Show-cart" class="list-group-item list-group-item-action">Cart</a>
-                    <a href="#" class="list-group-item list-group-item-action">Scheduled Exchanges</a>
+                    <a href="#" class="list-group-item list-group-item-action">Schedule Exchanges</a>
                 </div>
             </div>
             <div class="col-md-10">
@@ -62,9 +68,67 @@
                         </div>
                     </div>
                 </div>
+
+                <!--browse products-->
+                <%
+                    ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
+                    List<Product> list = pdao.getAllEnabledApprovedProducts();
+                %>
+
+                <div class="container py-2">
+                    <div class="row" data-masonry='{"percentPosition": true }'>
+                        <%
+                            int j;
+                            if (list.size() > 6) {
+                                j = 6;
+                            } else {
+                                j = list.size();
+                            }
+                            //                    for (Product product : list) {
+                            for (int i = 0; i < j; i++) {
+                                Product product = list.get(i);
+                                String sellprice = pdao.getSellingPrice(product.getpSellPrice());
+                                String rentprice = pdao.getRentPrice(product.getpRentPrice());
+                        %>
+                        <div class="col-md-4">
+                            <div class="card mt-4 product-card">                                
+                                <div class="card-header custom-bg"></div>
+                                <div class="card-body" >
+                                    <div class="container text-center">
+                                        <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 200px; max-width: 100%; width: auto" class="card-img-top" alt="...">
+                                    </div>
+                                    <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
+                                    <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
+                                </div>
+                                <div class="card-footer">
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: <%= rentprice%><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
+                                    <%
+                                        if (sellprice.equals("not for sale")) {
+                                    %>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <span class="text-secondary rent-duration"> <%= sellprice%> </span></button>
+                                    <%
+                                    } else {
+                                    %>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <%= sellprice%></button>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%
+                            }
+
+                            if (list.size() == 0) {
+                                out.println("<h2>No product available..</h2>");
+                            }
+                            //                    }
+                        %>
+                    </div>
+                </div>
+
             </div>
         </div>
-                                                
+
         <!--Edit profile-->
         <div class="modal fade" id="Edit-profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md">

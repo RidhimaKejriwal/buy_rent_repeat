@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/style.css">
         <script src="js/script.js" ></script>
         <%@include file="components/common_css_js.jsp" %>
+        <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
     </head>
     <body>
 
@@ -157,11 +158,11 @@
                         String rentprice = pdao.getRentPrice(product.getpRentPrice());
                 %>
                 <div class="col-md-4">
-                    <div class="card mt-4 product-card" style="height: 425px; width: 375px;">                                
+                    <div class="card mt-4 product-card" >                                
                         <div class="card-header custom-bg"></div>
                         <div class="card-body" >
                             <div class="container text-center">
-                                <img src="img/products/<%= product.getpPhoto1()%>" style="height: 200px; width: 200px;" class="card-img-top" alt="...">
+                                <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
                             </div>
                             <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
                             <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>

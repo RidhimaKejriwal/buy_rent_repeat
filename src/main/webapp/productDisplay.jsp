@@ -114,7 +114,7 @@
                                 if(user != null)
                                 {
                             %>
-                            <a href="cart.jsp"><button style="padding: 5px;" class="btn btn-success text-white"> Add to cart </button></a>
+                            <button onclick="add_to_cart(<%=product.getpId()%>, '<%=product.getpName()%>', <%=product.%>)" style="padding: 5px;" class="btn btn-success text-white"> Add to cart </button>
                             <%
                                 }
                             %>
