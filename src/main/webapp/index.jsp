@@ -1,3 +1,4 @@
+<%@page import="com.learn.buyrent.entities.User"%>
 <%@page import="com.learn.buyrent.helper.Helper"%>
 <%@page import="com.learn.buyrent.entities.Product"%>
 <%@page import="com.learn.buyrent.dao.ProductDao"%>
@@ -16,7 +17,57 @@
         <%@include file="components/common_css_js.jsp" %>
     </head>
     <body>
-        <%@include file="components/navbar.jsp" %>
+
+        <!--navbar-->
+        <%
+            User user1 = (User) session.getAttribute("current-user");
+        %>
+        <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
+            <div class="container-fluid">
+                <img class="logo" src="img/logo.jpeg" alt="alt"/>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/buyRent/">Request->Rent->Repeat</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-lg-0 ">
+                        <%
+                            if (user1 == null) {
+                        %>
+                        <li class="nav-item">
+                            <a class="nav-link active alink" href="login.jsp"> <i class="fa fa-user-circle"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active alink" href="register.jsp"> <i class="fa fa-user-plus"></i> Register</a>
+                        </li>
+                        <%
+                        } else {
+                        %>
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="userDashboard.jsp"> <i class="fa fa-user-circle"></i> <%= user1.getUserName()%></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="LogoutServlet">Logout</a>
+                        </li>
+                        <%
+                            }
+                        %>
+                        <li class="nav-item">
+                            <a class="nav-link active alink" href="guide.jsp">Guide</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active alink" href="#donate">Donate</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
         <%//            out.println(FactoryProvider.getFactory());
             CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
             List<Category> list1 = cdao.getCategories();
@@ -93,21 +144,24 @@
         <div class="container py-2">
             <div class="row" data-masonry='{"percentPosition": true }'>
                 <%
-                        int j;
-                        if(list.size()>6){ j = 6;
-                    }else{ j = list.size();}
-//                    for (Product product : list) {
-                        for (int i = 0; i < j; i++) {
+                    int j;
+                    if (list.size() > 6) {
+                        j = 6;
+                    } else {
+                        j = list.size();
+                    }
+                    //                    for (Product product : list) {
+                    for (int i = 0; i < j; i++) {
                         Product product = list.get(i);
-                            String sellprice = pdao.getSellingPrice(product.getpSellPrice());
-                            String rentprice = pdao.getRentPrice(product.getpRentPrice());
+                        String sellprice = pdao.getSellingPrice(product.getpSellPrice());
+                        String rentprice = pdao.getRentPrice(product.getpRentPrice());
                 %>
                 <div class="col-md-4">
-                    <div class="card mt-4 product-card">                                
+                    <div class="card mt-4 product-card" style="height: 425px; width: 375px;">                                
                         <div class="card-header custom-bg"></div>
                         <div class="card-body" >
                             <div class="container text-center">
-                                <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
+                                <img src="img/products/<%= product.getpPhoto1()%>" style="height: 200px; width: 200px;" class="card-img-top" alt="...">
                             </div>
                             <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
                             <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
@@ -128,13 +182,13 @@
                 </div>
 
                 <%
-                        }
+                    }
 
-                        if (list.size() == 0) {
-                            out.println("<h2>No product available..</h2>");
-                        }
-//                    }
-                %>
+                    if (list.size() == 0) {
+                        out.println("<h2>No product available..</h2>");
+                    }
+                    //                    }
+%>
             </div>
         </div>
 
@@ -154,7 +208,7 @@
 
             </div>
         </div>
-        
+
         <!--footer-->
         <div class="container-fluid text-center" style="background-color: #1e4040">
             <h5 style="margin-bottom: 0; color: white;">Contact us at : requestrentrepeat@gmail.com</h5>

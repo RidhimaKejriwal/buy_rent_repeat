@@ -1,6 +1,7 @@
 package com.learn.buyrent.servlets;
 
 import com.learn.buyrent.entities.Seller;
+import com.learn.buyrent.entities.User;
 import com.learn.buyrent.helper.FactoryProvider;
 import com.learn.buyrent.helper.Helper;
 import java.io.File;
@@ -27,6 +28,7 @@ public class EditServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
+            String person = request.getParameter("person");
             //fetch all edited data from form
 //            String id = request.getParameter("user_id");
             String email = request.getParameter("user_email");
@@ -41,52 +43,102 @@ public class EditServlet extends HttpServlet {
             String pic = part.getSubmittedFileName();
             System.out.println(pic);
 
-//            get the user from the session...
-            HttpSession session = request.getSession();
-            Seller seller = (Seller) session.getAttribute("current-seller");
-
+            if (person.equals("user")) {
+//            get the user from the session
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("current-user");
 //            replace new details with details in current user
-            seller.setUserName(name);
-            seller.setUserPassword(password);
-            seller.setUserPhone(phone);
-            seller.setUserAddress(adress);
-            seller.setUserCity(city);
-            String oldFile = seller.getUserPic();
-            if(pic.equals(""))
-            {
-                seller.setUserPic("default.png");
-                System.out.println("if block");
-            }
-            else{
-                seller.setUserPic(pic);
-                System.out.println("if block");
-            }
+                user.setUserName(name);
+                user.setUserPassword(password);
+                user.setUserPhone(phone);
+                user.setUserAddress(adress);
+                user.setUserCity(city);
+                String oldFile = user.getUserPic();
+                if (pic.equals("")) {
+                    user.setUserPic("default.png");
+                    System.out.println("if block");
+                } else {
+                    user.setUserPic(pic);
+                    System.out.println("else block");
+                }
 
-            String path = request.getRealPath("img") + File.separator + "seller" + File.separator + pic;
-            System.out.println(path);
-            //uploading code
-            try {
-                FileOutputStream fos = new FileOutputStream(path);
-                InputStream is = part.getInputStream();
-                //reading data
-                byte[] data = new byte[is.available()];
-                is.read(data);
-                //writing data
-                fos.write(data);
-                fos.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                String path = request.getRealPath("img") + File.separator + "user" + File.separator + pic;
+                System.out.println(path);
 
-            Session hibernateSession = FactoryProvider.getFactory().openSession();
-            Transaction tx = hibernateSession.beginTransaction();
-            hibernateSession.update(seller);
-            tx.commit();
-            hibernateSession.close();
-            
-            HttpSession httpsession = request.getSession();
-            httpsession.setAttribute("message", "Details successfully updated!!");
-            response.sendRedirect("sellerDashboard.jsp");
+                //uploading code
+                System.err.println("uploading ");
+                try {
+                    FileOutputStream fos = new FileOutputStream(path);
+                    InputStream is = part.getInputStream();
+                    //reading data
+                    byte[] data = new byte[is.available()];
+                    is.read(data);
+                    //writing data
+                    fos.write(data);
+                    fos.close();
+                    System.out.println("file uploaded");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Session hibernateSession = FactoryProvider.getFactory().openSession();
+                Transaction tx = hibernateSession.beginTransaction();
+                hibernateSession.update(user);
+                tx.commit();
+                hibernateSession.close();
+
+                HttpSession httpsession = request.getSession();
+                httpsession.setAttribute("message", "Details successfully updated!!");
+                response.sendRedirect("userDashboard.jsp");
+
+            } else {
+//            get the user from the session...
+                HttpSession session = request.getSession();
+                Seller seller = (Seller) session.getAttribute("current-seller");
+//            replace new details with details in current user
+                seller.setUserName(name);
+                seller.setUserPassword(password);
+                seller.setUserPhone(phone);
+                seller.setUserAddress(adress);
+                seller.setUserCity(city);
+                String oldFile = seller.getUserPic();
+                if (pic.equals("")) {
+                    seller.setUserPic("default.png");
+                    System.out.println("if block");
+                } else {
+                    seller.setUserPic(pic);
+                    System.out.println("if block");
+                }
+
+                String path = request.getRealPath("img") + File.separator + "seller" + File.separator + pic;
+                System.out.println(path);
+
+                //uploading code
+                System.err.println("uploading ");
+                try {
+                    FileOutputStream fos = new FileOutputStream(path);
+                    InputStream is = part.getInputStream();
+                    //reading data
+                    byte[] data = new byte[is.available()];
+                    is.read(data);
+                    //writing data
+                    fos.write(data);
+                    fos.close();
+                    System.out.println("file uploaded");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Session hibernateSession = FactoryProvider.getFactory().openSession();
+                Transaction tx = hibernateSession.beginTransaction();
+                hibernateSession.update(seller);
+                tx.commit();
+                hibernateSession.close();
+
+                HttpSession httpsession = request.getSession();
+                httpsession.setAttribute("message", "Details successfully updated!!");
+                response.sendRedirect("sellerDashboard.jsp");
+            }
         }
     }
 

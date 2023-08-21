@@ -4,6 +4,15 @@
     Author     : Dell
 --%>
 
+<%@page import="com.learn.buyrent.entities.Seller"%>
+<%@page import="com.learn.buyrent.entities.Admin"%>
+<%
+    User user = (User) session.getAttribute("current-user");
+    Seller seller = (Seller) session.getAttribute("current-seller");
+    Admin admin = (Admin) session.getAttribute("admin-login");
+    
+%>
+
 <%@page import="com.learn.buyrent.dao.CategoryDao"%>
 <%@page import="com.learn.buyrent.dao.SellerDao"%>
 <%@page import="com.learn.buyrent.helper.Helper"%>
@@ -101,7 +110,23 @@
                             </div>
                         </div>
                         <div class="card-footer">
+                            <%
+                                if(user != null)
+                                {
+                            %>
                             <a href="cart.jsp"><button style="padding: 5px;" class="btn btn-success text-white"> Add to cart </button></a>
+                            <%
+                                }
+                            %>
+                            
+                            <%
+                                if(user == null && seller == null && admin == null)
+                                {
+                            %>
+                            <a href="login.jsp"><button style="padding: 5px;" class="btn btn-success text-white"> Add to cart </button></a>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>

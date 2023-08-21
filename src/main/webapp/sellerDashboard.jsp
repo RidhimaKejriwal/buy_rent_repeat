@@ -35,7 +35,7 @@
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
                     <a href="" class="list-group-item list-group-item-action">Request</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Add-product" class="list-group-item list-group-item-action">Add new product</a>
-                    <a href="#" class="list-group-item list-group-item-action">Schedule Exchanges</a>
+                    <a href="#" class="list-group-item list-group-item-action">Scheduled Exchanges</a>
 
                 </div>
             </div>
@@ -101,6 +101,7 @@
                             <div style="">
                                 <h5 class="mt-2">Please Edit Carefully!!</h5> 
                                 <form action="EditServlet" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="person" value="seller">
                                     <table class="table">
                                         <tr>
                                             <td>ID :</td>
