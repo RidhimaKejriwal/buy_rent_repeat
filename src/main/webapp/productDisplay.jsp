@@ -4,13 +4,16 @@
     Author     : Dell
 --%>
 
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.List"%>
+<%@page import="com.learn.buyrent.entities.Category"%>
 <%@page import="com.learn.buyrent.entities.Seller"%>
 <%@page import="com.learn.buyrent.entities.Admin"%>
 <%
     User user = (User) session.getAttribute("current-user");
     Seller seller = (Seller) session.getAttribute("current-seller");
     Admin admin = (Admin) session.getAttribute("admin-login");
-
+    LocalDate date = LocalDate.now();
 %>
 
 <%@page import="com.learn.buyrent.dao.CategoryDao"%>
@@ -36,7 +39,7 @@
             CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
             Product product = pdao.getProductbyId(product_Id);
 //            System.out.println(product);
-        %>
+%>
         <%@include file="components/navbar.jsp" %>
 
         <div class="container py-2">
@@ -114,15 +117,15 @@
 
 
                             %>
-                            <button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Rent </button>
-                            <button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Buy </button>
+                            <button data-bs-toggle="modal" data-bs-target="#Product-Rent" style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Rent </button>
+                            <button data-bs-toggle="modal" data-bs-target="#Product-Sell" style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Buy </button>
                             <%                            } else if (product.getpRentPrice() == 0) {
                             %>
-                            <button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Buy </button>
+                            <button data-bs-toggle="modal" data-bs-target="#Product-Sell" style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Buy </button>
                             <%
                             } else {
                             %>
-                            <button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Rent </button>
+                            <button data-bs-toggle="modal" data-bs-target="#Product-Rent" style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Rent </button>
                             <%
                                     }
                                 }
@@ -150,91 +153,102 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div style=""> 
+                        <div style="">
                             <form action="RentProductServlet" method="post">
-                                <input type="hidden" name="operation" value="addProduct">
                                 <table class="table">
                                     <tr>
                                         <td>Product Name : </td>
-                                        <td><input type="text" class="form-control" name="p_" readonly value="<%= nseller.getUserId()%>"></td>
+                                        <td><input type="text" class="form-control" name="p_name" value="<%= product.getpName()%>" readonly></td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td>Seller Name :</td>
+                                        <td><input type="text" class="form-control" name="s_name" value="<%= seller.getUserName()%>" readonly></td>
                                     </tr>
                                     <tr>
-                                        <%
-                                            CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
-                                            List<Category> list1 = cdao.getCategories();
-                                        %>
-                                        <td>Category<span style="color: red">*</span> : </td>
-                                        <td>
-                                            <select name="p_category" required>
-                                                <option value="0">Other</option>
-                                                <%
-                                                    for (Category category : list1) {
-                                                %>
-
-                                                <option value="<%= category.getCategoryId()%>" ><%= category.getCategoryTitle()%></option>
-
-                                                <%
-                                                    }
-                                                %>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Product Name<span style="color: red">*</span> :</td>
-                                        <td><input type="text" class="form-control" name="p_name" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Product Description<span style="color: red">*</span> :</td>
-                                        <td><input type="text" class="form-control" name="p_desc" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Photo1<span style="color: red">*</span> :</td>
-                                        <td><input type="file" class="form-control" name="p_image1" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Photo2<span style="color: red">*</span> :</td>
-                                        <td><input type="file" class="form-control" name="p_image2" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Selling Price :</td>
-                                        <td><input type="number" class="form-control" name="p_sellingprice" value="0"></td>
+                                        <td>Seller Address :</td>
+                                        <td><input type="text" class="form-control" name="s_address" value="<%= seller.getUserAddress()%>" readonly></td>
                                     </tr>
                                     <tr>
                                         <td>Rent Price :</td>
-                                        <td><input type="number" class="form-control" name="p_rentprice" value="0"></td>
+                                        <td><input type="text" class="form-control" name="p_rentprice" readonly value="<%= product.getpRentPrice()%>"></td>
+                                        <td><input type="text" class="form-control" name="p_rentduration" readonly value="<%= product.getpRentDuration()%>"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Your requested duration<span style="color: red">*</span> :</td>
                                         <td>
-                                            <select name="p_rentduration">
-                                                <option value="">None</option>
-                                                <option>per Day</option>                                        
-                                                <option>per Week</option>                                        
-                                                <option>per Month</option>                                        
-                                                <option>for 3 months</option>                                        
-                                                <option>for 6 months</option>                                        
+                                            <select name="requested_duration_number" required>
+                                                <%
+                                                    for(int i=1; i<=31; i++){
+                                                    %>
+                                                    <option value="<%=i%>"><%=i%></option>
+                                                <%
+                                                    }
+                                                %>                                                                                      
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="requested_duration_type" required>
+                                                <option value="day(s)">day(s)</option>
+                                                <option value="week(s)">week(s)</option>
+                                                <option value="month(s)">month(s)</option>
+                                            </select>
+                                        </td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td>Exchange date<span style="color: red">*</span> :</td>
+                                        <td><input type='date' name='date' min="<%=date%>" required></td>
+                                    </tr>
+                                </table>
+                                <div class="container">
+                                    <button type="submit" class="btn custom-bg text-white">Send Request</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Add new product-->
+        <div class="modal fade" id="Product-Sell" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header custom-bg text-center text-white">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Sell Product </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style=""> 
+                            <form action="SellProductServlet" method="post">                                
+                                <table class="table">
+                                    <tr>
+                                        <td>Product Name : </td>
+                                        <td><input type="text" class="form-control" name="p_name" value="<%= product.getpName()%>" readonly></td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td>Seller Name :</td>
+                                        <td><input type="text" class="form-control" name="s_name" value="<%= seller.getUserName()%>" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Seller Address :</td>
+                                        <td><input type="text" class="form-control" name="s_address" value="<%= seller.getUserAddress()%>" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Selling Price :</td>
+                                        <td><input type="number" class="form-control" name="p_sellingprice" readonly="" value="<%= product.getpSellPrice() %>"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mode of delivery<span style="color: red">*</span> :</td>                                        
+                                        <td>
+                                            <select name="delivery_mode">
+                                                <option value="pickup">Pickup from seller(free)</option>                                                                                       
+                                                <option value="deliver">Get it delivered(+15%)</option>                                                                                       
                                             </select>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Quality<span style="color: red">*</span> :</td>
-                                        <td>
-                                            <select name="p_quality" required>
-                                                <option value="5">5 (Excellent)</option>                                        
-                                                <option value="4">4 (Very Good)</option>                                        
-                                                <option value="3">3 (Good)</option>                                        
-                                                <option value="2">2 (Average)</option>                                        
-                                                <option value="1">1 (Poor)</option>                                        
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Used for<span style="color: red">*</span> :</td>
-                                        <td>
-                                            <select name="p_usedfor" required>
-                                                <option>less than 1 year</option>
-                                                <option>between 1 & 2 year</option>
-                                                <option>between 2 & 3 year</option>
-                                                <option>more than 3 year</option>
-                                            </select>
-                                        </td>
+                                        <td>Exchange date<span style="color: red">*</span> :</td>
+                                        <td><input type='date' name='date' min="<%=date%>" required></td>
                                     </tr>
                                 </table>
                                 <div class="container">
@@ -246,6 +260,5 @@
                 </div>
             </div>
         </div>
-
     </body>
 </html>
