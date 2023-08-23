@@ -74,7 +74,7 @@
             List<Category> list1 = cdao.getCategories();
         %>
         <div>
-            <table class="table table-dark table-striped-columns" style="width: 100%; border: 1px solid black;" >
+            <table class="table table-success table-striped-columns" style="width: 100%; border: 1px solid black;" >
                 <tr align="center">
                     <%
                         for (Category category : list1) {

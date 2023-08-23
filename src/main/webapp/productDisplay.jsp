@@ -37,7 +37,8 @@
             ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
             SellerDao sdao = new SellerDao(FactoryProvider.getFactory());
             CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
-            Product product = pdao.getProductbyId(product_Id);
+            Product product = pdao.getProductbyId(product_Id);            
+            Seller nseller = sdao.getUserById(product.getSeller_id());
 //            System.out.println(product);
 %>
         <%@include file="components/navbar.jsp" %>
@@ -88,8 +89,8 @@
                                         <h5>Product by: </h5>
                                     </div>
                                     <div class="col-md-9">
-                                        <p style="margin-bottom:0"> <%= sdao.getUserById(product.getSeller_id()).getUserName()%> </p>
-                                        <p style="margin-bottom:0"> <%= sdao.getUserById(product.getSeller_id()).getUserAddress()%> (<%= sdao.getUserById(product.getSeller_id()).getUserCity()%>) </p>
+                                        <p style="margin-bottom:0"> <%= nseller.getUserName()%> </p>
+                                        <p style="margin-bottom:0"> <%= nseller.getUserAddress()%> (<%= nseller.getUserCity()%>) </p>
                                     </div>
                                 </div>
                                 <div class="row product-card">
@@ -162,11 +163,11 @@
                                     </tr>                                    
                                     <tr>
                                         <td>Seller Name :</td>
-                                        <td><input type="text" class="form-control" name="s_name" value="<%= seller.getUserName()%>" readonly></td>
+                                        <td><input type="text" class="form-control" name="s_name" value="<%= nseller.getUserName()%>" readonly></td>
                                     </tr>
                                     <tr>
                                         <td>Seller Address :</td>
-                                        <td><input type="text" class="form-control" name="s_address" value="<%= seller.getUserAddress()%>" readonly></td>
+                                        <td><input type="text" class="form-control" name="s_address" value="<%= nseller.getUserAddress()%>" readonly></td>
                                     </tr>
                                     <tr>
                                         <td>Rent Price :</td>
@@ -176,18 +177,10 @@
                                     <tr>
                                         <td>Your requested duration<span style="color: red">*</span> :</td>
                                         <td>
-                                            <select name="requested_duration_number" required>
-                                                <%
-                                                    for(int i=1; i<=31; i++){
-                                                    %>
-                                                    <option value="<%=i%>"><%=i%></option>
-                                                <%
-                                                    }
-                                                %>                                                                                      
-                                            </select>
+                                            <input type="number" class="form-control" name="requested_duration_number" required>
                                         </td>
                                         <td>
-                                            <select name="requested_duration_type" required>
+                                            <select class="form-control" name="requested_duration_type" required>
                                                 <option value="day(s)">day(s)</option>
                                                 <option value="week(s)">week(s)</option>
                                                 <option value="month(s)">month(s)</option>
@@ -196,7 +189,7 @@
                                     </tr>                                    
                                     <tr>
                                         <td>Exchange date<span style="color: red">*</span> :</td>
-                                        <td><input type='date' name='date' min="<%=date%>" required></td>
+                                        <td><input type='date' class="form-control" name='date' min="<%=date%>" required></td>
                                     </tr>
                                 </table>
                                 <div class="container">
@@ -209,7 +202,7 @@
             </div>
         </div>
 
-        <!--Add new product-->
+        <!-- Sell product-->
         <div class="modal fade" id="Product-Sell" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -227,11 +220,11 @@
                                     </tr>                                    
                                     <tr>
                                         <td>Seller Name :</td>
-                                        <td><input type="text" class="form-control" name="s_name" value="<%= seller.getUserName()%>" readonly></td>
+                                        <td><input type="text" class="form-control" name="s_name" value="<%= nseller.getUserName()%>" readonly></td>
                                     </tr>
                                     <tr>
                                         <td>Seller Address :</td>
-                                        <td><input type="text" class="form-control" name="s_address" value="<%= seller.getUserAddress()%>" readonly></td>
+                                        <td><input type="text" class="form-control" name="s_address" value="<%= nseller.getUserAddress()%>" readonly></td>
                                     </tr>
                                     <tr>
                                         <td>Selling Price :</td>
@@ -240,7 +233,7 @@
                                     <tr>
                                         <td>Mode of delivery<span style="color: red">*</span> :</td>                                        
                                         <td>
-                                            <select name="delivery_mode">
+                                            <select class="form-control" name="delivery_mode" required>
                                                 <option value="pickup">Pickup from seller(free)</option>                                                                                       
                                                 <option value="deliver">Get it delivered(+15%)</option>                                                                                       
                                             </select>
@@ -248,11 +241,11 @@
                                     </tr>
                                     <tr>
                                         <td>Exchange date<span style="color: red">*</span> :</td>
-                                        <td><input type='date' name='date' min="<%=date%>" required></td>
+                                        <td><input type='date' class="form-control" name='date' min="<%=date%>" required></td>
                                     </tr>
                                 </table>
                                 <div class="container">
-                                    <button type="submit" class="btn custom-bg text-white">Add</button>
+                                    <button type="submit" class="btn custom-bg text-white">Send Request</button>
                                 </div>
                             </form>
                         </div>
