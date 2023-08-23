@@ -1,12 +1,19 @@
 
 package com.learn.buyrent.servlets;
 
+import com.learn.buyrent.dao.RentCartDao;
+import com.learn.buyrent.entities.RentCart;
+import com.learn.buyrent.helper.FactoryProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class SellProductServlet extends HttpServlet {
 
@@ -15,7 +22,39 @@ public class SellProductServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String pname = request.getParameter("p_name");
+            String sname = request.getParameter("s_name");
+            String uname = request.getParameter("u_name");
+            String saddress = request.getParameter("s_address");
+            int sellingPrice = Integer.parseInt(request.getParameter("p_sellingprice"));
+            String modeOfDelivery = request.getParameter("delivery_mode");
+            String exDate = request.getParameter("date");
+            LocalDate ldate = LocalDate.parse(exDate);
             
+            HttpSession httpSession = request.getSession();
+            
+            RentCartDao rcdao = new RentCartDao(FactoryProvider.getFactory());
+            int buyPrice = rcdao.buyingPrice(sellingPrice, modeOfDelivery);
+            
+            RentCart rcart = new RentCart();
+            rcart.setProductName(pname);
+            rcart.setSellerName(sname);
+            rcart.setUserName(uname);
+            rcart.setSellerAddress(saddress);
+            rcart.setBuyingPrice(buyPrice);
+            rcart.setModeOfDelivery(modeOfDelivery);
+            rcart.setExchangeDate(ldate);
+            rcart.setRequestAccepted("no");
+            rcart.setIsDelivered("no");
+            
+            Session hibernateSession = FactoryProvider.getFactory().openSession();
+            Transaction tx = hibernateSession.beginTransaction();
+            hibernateSession.save(rcart);
+            tx.commit();
+            hibernateSession.close();
+
+            httpSession.setAttribute("message", "Your request has been sent to the seller !!..");
+            response.sendRedirect("userDashboard.jsp");
         }
     }
 

@@ -42,6 +42,7 @@
 //            System.out.println(product);
 %>
         <%@include file="components/navbar.jsp" %>
+        <%@include file="components/message.jsp" %>
 
         <div class="container py-2">
             <div class="row" data-masonry='{"percentPosition": true }'>
@@ -156,6 +157,7 @@
                     <div class="modal-body">
                         <div style="">
                             <form action="RentProductServlet" method="post">
+                                <input type="hidden" name="u_name" value="<%= user.getUserName() %>">
                                 <table class="table">
                                     <tr>
                                         <td>Product Name : </td>
@@ -171,7 +173,7 @@
                                     </tr>
                                     <tr>
                                         <td>Rent Price :</td>
-                                        <td><input type="text" class="form-control" name="p_rentprice" readonly value="<%= product.getpRentPrice()%>"></td>
+                                        <td><input type="number" class="form-control" name="p_rentprice" readonly value="<%= product.getpRentPrice()%>"></td>
                                         <td><input type="text" class="form-control" name="p_rentduration" readonly value="<%= product.getpRentDuration()%>"></td>
                                     </tr>
                                     <tr>
@@ -212,7 +214,8 @@
                     </div>
                     <div class="modal-body">
                         <div style=""> 
-                            <form action="SellProductServlet" method="post">                                
+                            <form action="SellProductServlet" method="post"> 
+                                <input type="hidden" name="u_name" value="<%= user.getUserName() %>">
                                 <table class="table">
                                     <tr>
                                         <td>Product Name : </td>
@@ -235,7 +238,7 @@
                                         <td>
                                             <select class="form-control" name="delivery_mode" required>
                                                 <option value="pickup">Pickup from seller(free)</option>                                                                                       
-                                                <option value="deliver">Get it delivered(+15%)</option>                                                                                       
+                                                <option value="deliver">Get it delivered(+10%)</option>                                                                                       
                                             </select>
                                         </td>
                                     </tr>
