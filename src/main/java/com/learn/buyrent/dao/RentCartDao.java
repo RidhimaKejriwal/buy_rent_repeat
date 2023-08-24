@@ -1,10 +1,13 @@
 
 package com.learn.buyrent.dao;
 
+import com.learn.buyrent.entities.Product;
 import com.learn.buyrent.entities.RentCart;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class RentCartDao 
 {
@@ -94,5 +97,25 @@ public class RentCartDao
             price = sellingPrice + (int)deliveryCharge;
         }
         return price;
+    }
+    
+    public List<RentCart> allRentedProductwithUserId(int userId)
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from RentCart where userId =: id and requestAccepted =: a");
+        query.setParameter("id", userId);
+        query.setParameter("a", "no");
+        List<RentCart> list = query.list();
+        return list;        
+    }
+    
+    public List<RentCart> allRentedProductwithSellerId(int sellerId)
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from RentCart where sellerId =: id and requestAccepted =: a");
+        query.setParameter("id", sellerId);
+        query.setParameter("a", "no");
+        List<RentCart> list = query.list();
+        return list;
     }
 }

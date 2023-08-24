@@ -20,6 +20,9 @@ public class RentProductServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            int uid = Integer.parseInt(request.getParameter("u_id"));
+            int sid = Integer.parseInt(request.getParameter("s_id"));
+            int pid = Integer.parseInt(request.getParameter("p_id"));
             String pname = request.getParameter("p_name");
             String sname = request.getParameter("s_name");
             String uname = request.getParameter("u_name");
@@ -54,6 +57,9 @@ public class RentProductServlet extends HttpServlet {
             String duration = rcdao.finalRentDuration(duration_number, duration_type);
 
             RentCart rcart = new RentCart();
+            rcart.setUserId(uid);
+            rcart.setSellerId(sid);
+            rcart.setProductId(pid);
             rcart.setProductName(pname);
             rcart.setSellerName(sname);
             rcart.setUserName(uname);

@@ -158,6 +158,9 @@
                         <div style="">
                             <form action="RentProductServlet" method="post">
                                 <input type="hidden" name="u_name" value="<%= user.getUserName() %>">
+                                <input type="hidden" name="u_id" value="<%= user.getUserId() %>">
+                                <input type="hidden" name="s_id" value="<%= nseller.getUserId() %>">
+                                <input type="hidden" name="p_id" value="<%= product.getpId() %>">
                                 <table class="table">
                                     <tr>
                                         <td>Product Name : </td>
@@ -216,6 +219,9 @@
                         <div style=""> 
                             <form action="SellProductServlet" method="post"> 
                                 <input type="hidden" name="u_name" value="<%= user.getUserName() %>">
+                                <input type="hidden" name="u_id" value="<%= user.getUserId() %>">
+                                <input type="hidden" name="s_id" value="<%= nseller.getUserId() %>">
+                                <input type="hidden" name="p_id" value="<%= product.getpId() %>">
                                 <table class="table">
                                     <tr>
                                         <td>Product Name : </td>
