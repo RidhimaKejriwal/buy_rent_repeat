@@ -36,7 +36,7 @@
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
                     <a href="requests.jsp" class="list-group-item list-group-item-action">Request</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Add-product" class="list-group-item list-group-item-action">Add new product</a>
-                    <a href="#" class="list-group-item list-group-item-action">Scheduled Exchanges</a>
+                    <a href="ScheduledExchanges.jsp" class="list-group-item list-group-item-action">Scheduled Exchanges</a>
 
                 </div>
             </div>

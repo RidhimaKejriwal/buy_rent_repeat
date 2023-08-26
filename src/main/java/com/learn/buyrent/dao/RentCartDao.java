@@ -118,4 +118,24 @@ public class RentCartDao
         List<RentCart> list = query.list();
         return list;
     }
+    
+    public List<RentCart> allRentedApprovedProductwithUserId(int userId)
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from RentCart where userId =: id and requestAccepted =: a");
+        query.setParameter("id", userId);
+        query.setParameter("a", "yes");
+        List<RentCart> list = query.list();
+        return list;        
+    }
+    
+    public List<RentCart> allRentedApprovedProductwithSellerId(int sellerId)
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from RentCart where sellerId =: id and requestAccepted =: a");
+        query.setParameter("id", sellerId);
+        query.setParameter("a", "yes");
+        List<RentCart> list = query.list();
+        return list;
+    }
 }
