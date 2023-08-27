@@ -40,6 +40,7 @@
                 %>
                 <tr align="center">
                     <td><a href="<%= ngo.getLink()%>"><%= ngo.getName()%></a></td>
+                    <td><%= ngo.getCause() %></td>
                 </tr>
                 <%
                     }

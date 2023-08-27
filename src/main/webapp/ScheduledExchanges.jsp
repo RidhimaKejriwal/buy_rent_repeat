@@ -44,7 +44,7 @@
                 <%
                     RentCartDao rcdao = new RentCartDao(FactoryProvider.getFactory());
                     ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
-                    List<RentCart> list = rcdao.allRentedProductwithUserId(nuser.getUserId());
+                    List<RentCart> list = rcdao.allRentedApprovedIncompleteProductwithUserId(nuser.getUserId());
                 %>
 
                 <div class="container py-2">
@@ -60,7 +60,7 @@
                                         <div class="col-md-2">
                                             <img src="img/products/<%= product.getpPhoto1()%>" style="height: 100px;  width: auto;" class="card-img-top" alt="...">
                                         </div>
-                                        <div class="col-md-5" style="padding-left: 10px;">
+                                        <div class="col-md-4" style="padding-left: 10px;">
                                             <h5 style="padding-left: 10px;" class="card-title mt-3"> <%= product.getpName()%></h5>
                                             <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
                                         </div>
@@ -79,12 +79,20 @@
                                             <%
                                                 }
                                             %>
-
                                         </div>
-                                        <!--                                        <div class="col-md-2 text-center">
-                                                                                    <a href="ApproveServlet?product_id=<%= product.getpId()%>&op=approve"><button class="btn custom-bg2" style="margin-top: 2vh;">Approve</button><a>
-                                                                                    <a href="ApproveServlet?product_id=<%= product.getpId()%>&op=reject"><button class="btn custom-bg2" style="margin-top: 2vh;">Reject</button></a>
-                                                                                </div>-->
+                                        <div class="col-md-2" style="margin-top: 25px;">
+                                            <%
+                                                if(rentProduct.getIsDelivered().equals("no")){
+                                            %>
+                                            <button class="btn btn-outline-success"> Not Exchanged </button>
+                                            <%
+                                                } else if(rentProduct.getIsReturned().equals("no")){
+                                            %>
+                                            <button class="btn custom-bg2"> Return </button>
+                                            <%
+                                                }
+                                            %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -107,6 +115,9 @@
 </div>
 <%
 } else {
-%>                
+%>       
+<%
+    }
+%>
 </body>
 </html>

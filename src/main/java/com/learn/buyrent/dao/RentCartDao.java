@@ -119,12 +119,13 @@ public class RentCartDao
         return list;
     }
     
-    public List<RentCart> allRentedApprovedProductwithUserId(int userId)
+    public List<RentCart> allRentedApprovedIncompleteProductwithUserId(int userId)
     {
         Session s = this.factory.openSession();
-        Query query = s.createQuery("from RentCart where userId =: id and requestAccepted =: a");
+        Query query = s.createQuery("from RentCart where userId =: id and requestAccepted =: a and processComplete =: p");
         query.setParameter("id", userId);
         query.setParameter("a", "yes");
+        query.setParameter("p", "incomplete");
         List<RentCart> list = query.list();
         return list;        
     }

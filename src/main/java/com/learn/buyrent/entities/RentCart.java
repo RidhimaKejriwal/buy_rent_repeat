@@ -29,6 +29,8 @@ public class RentCart
     private String isReturned;
     private String isDelivered;
     private String modeOfDelivery;
+    private String verifyOTP;
+    private String processComplete;
 
     public int getId() {
         return id;
@@ -156,6 +158,22 @@ public class RentCart
 
     public void setModeOfDelivery(String modeOfDelivery) {
         this.modeOfDelivery = modeOfDelivery;
+    }
+
+    public String getVerifyOTP() {
+        return verifyOTP;
+    }
+
+    public void setVerifyOTP(String verifyOTP) {
+        this.verifyOTP = verifyOTP;
+    }
+
+    public String getProcessComplete() {
+        return processComplete;
+    }
+
+    public void setProcessComplete(String ProcessComplete) {
+        this.processComplete = ProcessComplete;
     }
     
     public RentCart(int id, String productName, String sellerName, String userName, String sellerAddress, int rentPrice, String rentDuration, LocalDate exchangeDate, String requestAccepted, String isReturned) {

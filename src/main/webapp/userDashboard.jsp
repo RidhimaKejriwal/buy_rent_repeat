@@ -32,7 +32,7 @@
                     <a href="" class="list-group-item list-group-item-action active custom-bg " style="border: #ef0078" aria-current="true">Menu</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
                     <a href="requests.jsp" class="list-group-item list-group-item-action">Requests sent</a>
-                    <a href="#" class="list-group-item list-group-item-action">Schedule Exchanges</a>
+                    <a href="ScheduledExchanges.jsp" class="list-group-item list-group-item-action">Schedule Exchanges</a>
                 </div>
             </div>
             <div class="col-md-10">
