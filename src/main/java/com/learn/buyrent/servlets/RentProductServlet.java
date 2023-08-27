@@ -35,6 +35,7 @@ public class RentProductServlet extends HttpServlet {
             LocalDate ldate = LocalDate.parse(exDate);
             String requestAccepted = "no";
             String isReturned = "no";
+            String processComplete = "incomplete";
 
             HttpSession httpSession = request.getSession();
             if (duration_number == 0) {
@@ -70,6 +71,7 @@ public class RentProductServlet extends HttpServlet {
             rcart.setRequestAccepted(requestAccepted);
             rcart.setIsReturned(isReturned);
             rcart.setIsDelivered("no");
+            rcart.setProcessComplete(processComplete);
 
             Session hibernateSession = FactoryProvider.getFactory().openSession();
             Transaction tx = hibernateSession.beginTransaction();

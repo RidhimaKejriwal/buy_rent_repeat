@@ -41,6 +41,33 @@ public class RentCartDao
         return f;
     }
     
+    public void updateProduct(RentCart rcart)
+    {
+        try
+        {
+            Session session = this.factory.openSession();
+            Transaction tx = session.beginTransaction();
+            session.update(rcart);
+            tx.commit();
+            session.close();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }        
+    }
+    
+    public void deleteProduct(int id)
+    {
+        Session session = this.factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("delete from RentCart where id =: i");
+        query.setParameter("i", id);
+        int r = query.executeUpdate();
+        System.out.println(r);
+        tx.commit();
+        session.close();
+    }
+    
     public int finalRentPrice(int rentPrice, String rentDuration , int durationNumber, String durationType)
     {
         int price = 0;
@@ -99,6 +126,16 @@ public class RentCartDao
         return price;
     }
     
+    public RentCart getProductwithId(int id)
+    {
+        RentCart product = new RentCart();
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from RentCart where id =: i");
+        query.setParameter("i", id);
+        product = (RentCart)query.uniqueResult();
+        return product;        
+    }
+    
     public List<RentCart> allRentedProductwithUserId(int userId)
     {
         Session s = this.factory.openSession();
@@ -130,12 +167,13 @@ public class RentCartDao
         return list;        
     }
     
-    public List<RentCart> allRentedApprovedProductwithSellerId(int sellerId)
+    public List<RentCart> allRentedApprovedIncompleteProductwithSellerId(int sellerId)
     {
         Session s = this.factory.openSession();
-        Query query = s.createQuery("from RentCart where sellerId =: id and requestAccepted =: a");
+        Query query = s.createQuery("from RentCart where sellerId =: id and requestAccepted =: a and processComplete =: p");
         query.setParameter("id", sellerId);
         query.setParameter("a", "yes");
+        query.setParameter("p", "incomplete");
         List<RentCart> list = query.list();
         return list;
     }

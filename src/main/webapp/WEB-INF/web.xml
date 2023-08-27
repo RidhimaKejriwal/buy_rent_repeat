@@ -44,6 +44,10 @@
         <servlet-name>SellProductServlet</servlet-name>
         <servlet-class>com.learn.buyrent.servlets.SellProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.learn.buyrent.servlets.CartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>VerifyServlet</servlet-name>
         <url-pattern>/VerifyServlet</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>SellProductServlet</servlet-name>
         <url-pattern>/SellProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/CartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

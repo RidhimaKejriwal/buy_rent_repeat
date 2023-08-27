@@ -58,4 +58,25 @@ public class UserDao {
         
         return user;
     }
+    
+    public User getUserById(int uid)
+    {
+        User user = null;
+        
+        try
+        {
+            String query = "from User where userId =: id ";
+            Session session1 = this.factory.openSession();
+            Query q = session1.createQuery(query);
+            q.setParameter("id", uid);
+            user = (User) q.uniqueResult();
+            session1.close();
+            
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return user;
+    }
 }

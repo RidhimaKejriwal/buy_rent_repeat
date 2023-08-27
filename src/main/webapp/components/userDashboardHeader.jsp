@@ -53,17 +53,14 @@
 <%@include file="sel_navbar.jsp" %>
         <div class="row mt-3 mx-2">
             <div class="col-md-2">
-
                 <div class="list-group mt-4">
                     <a href="" class="list-group-item list-group-item-action active custom-bg " style="border: #ef0078" aria-current="true">
                         Menu
                     </a>
-
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
-                    <a href="" class="list-group-item list-group-item-action">Request</a>
+                    <a href="requests.jsp" class="list-group-item list-group-item-action">Request</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Add-product" class="list-group-item list-group-item-action">Add new product</a>
-                    <a href="ScheduledExchanges.jsp" class="list-group-item list-group-item-action">Scheduled Exchanges</a>
-
+                    <a href="ScheduledExchanges.jsp" class="list-group-item list-group-item-action">Schedule Exchanges</a>
                 </div>
             </div>
             <div class="col-md-10">
