@@ -59,7 +59,7 @@
                                         <div class="col-md-2">
                                             <img src="img/products/<%= product.getpPhoto1()%>" style="height: 100px;  width: auto;" class="card-img-top" alt="...">
                                         </div>
-                                        <div class="col-md-4" style="padding-left: 10px;">
+                                        <div class="col-md-4" style="padding-left: 20px;">
                                             <h5 style="padding-left: 10px;" class="card-title mt-3"> <%= product.getpName()%></h5>
                                             <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
                                         </div>
@@ -85,9 +85,18 @@
                                             %>
                                             <button class="btn btn-outline-success"> Not Delivered </button>
                                             <%
-                                            } else if (rentProduct.getIsReturned().equals("no")) {
+                                            } else if (rentProduct.getIsReturned().equals("no") && rentProduct.getVerifyOTP() == null) {
                                             %>
-                                            <button class="btn custom-bg2"> Return </button>
+                                            <a href="CartServlet?product_id=<%= rentProduct.getId()%>&op=return"><button class="btn custom-bg text-white"> Return </button></a>
+                                            <%
+                                            } else if (rentProduct.getIsReturned().equals("no") && rentProduct.getVerifyOTP() != null) {
+                                            %>
+                                            <form class="form-group" action="CartServlet?product_id=<%= rentProduct.getId()%>&op=verifyreturn" method="post">
+                                                <div>
+                                                    <input required name="authcode" type="text" class="form-control" id="code" aria-describedby="emailHelp">
+                                                    <button style="margin-top: 20px;" type="submit" value="verify" class="btn custom-bg text-white">Verify</button>
+                                                </div>
+                                            </form>
                                             <%
                                                 }
                                             %>

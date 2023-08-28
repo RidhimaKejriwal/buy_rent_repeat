@@ -74,6 +74,7 @@ public class CartServlet extends HttpServlet {
                         if (mode != null) {
                             rentProduct.setProcessComplete("complete");
                         }
+                        rentProduct.setVerifyOTP(null);
                         rcdao.updateProduct(rentProduct);
                         response.sendRedirect("ScheduledExchanges.jsp");
                     } else {
@@ -81,7 +82,30 @@ public class CartServlet extends HttpServlet {
                         httpSession.setAttribute("error_message", "Invalid OTP !!..");
                         response.sendRedirect("ScheduledExchanges.jsp");
                     }
-
+                    break;
+                case "return":
+                    String otp = sm.getRandom();
+                    System.out.print(otp);
+                    rentProduct.setVerifyOTP(otp);
+                    rcdao.updateProduct(rentProduct);
+                    sm.exchangeOTPSeller(seller, rentProduct);
+                    response.sendRedirect("ScheduledExchange.jsp");
+                    break;
+                case "verifyreturn":
+                    database_code = rentProduct.getVerifyOTP();
+                    entered_code = request.getParameter("authcode");
+                    if( entered_code.equals(database_code)){
+                        rentProduct.setIsReturned("yes");
+                        rentProduct.setProcessComplete("complete");
+                        rentProduct.setVerifyOTP(null);
+                        rcdao.updateProduct(rentProduct);
+                        response.sendRedirect("ScheduledExchanges.jsp");
+                    }
+                    else{
+                        HttpSession httpSession = request.getSession();
+                        httpSession.setAttribute("error_message", "Invalid OTP !!..");
+                        response.sendRedirect("ScheduledExchanges.jsp");
+                    }
                     break;
                 default:
                     break;

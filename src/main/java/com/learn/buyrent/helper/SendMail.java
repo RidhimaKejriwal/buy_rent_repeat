@@ -100,4 +100,15 @@ public class SendMail {
         String text = "Here is your Exchange OTP: " + product.getVerifyOTP()+". Provide this OTP to seller only at the time of receiving product.";
         gmail.sendEmail(to, from, subject, text);
     }
+    
+    public void exchangeOTPSeller(Seller seller, RentCart product)
+    {
+        GmailSender gmail = new GmailSender();
+        String to = seller.getUserEmail();
+        String from = "requestrentrepeat@gmail.com";
+        String subject = "Exchange OTP";
+        String text = "Here is your Exchange OTP: " + product.getVerifyOTP()+". Provide this OTP to user only at the time of return of product.";
+        gmail.sendEmail(to, from, subject, text);
+    }
+    
 }

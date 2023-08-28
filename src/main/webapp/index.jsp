@@ -99,8 +99,8 @@
                         <button class="btn btn-outline-success hv" type="submit">Search</button>
                     </form>
                     <div style="margin-top: 20px;">
-                        <button type='button' style="margin-right: 20px" class="btn custom-bg2 hv">List an item</button>
-                        <button type='button' class="btn custom-bg2 hv">Browse</button>
+                        <a href="register.jsp"><button type='button' style="margin-right: 20px" class="btn custom-bg2 hv">List an item</button></a>
+                        <a href="browse.jsp"><button type='button' class="btn custom-bg2 hv">Browse</button></a>
                     </div>
 
                 </div>
