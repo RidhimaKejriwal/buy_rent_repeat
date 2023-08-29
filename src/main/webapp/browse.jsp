@@ -4,6 +4,9 @@
     Author     : Dell
 --%>
 
+<%@page import="com.learn.buyrent.helper.Helper"%>
+<%@page import="com.learn.buyrent.entities.Product"%>
+<%@page import="com.learn.buyrent.dao.ProductDao"%>
 <%@page import="com.learn.buyrent.entities.Category"%>
 <%@page import="com.learn.buyrent.helper.FactoryProvider"%>
 <%@page import="java.util.List"%>
@@ -88,6 +91,69 @@
                     %>
                 </tr>
             </table>
+        </div>
+
+        <div class="row mt-3 mx-2">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-10">
+
+                <%@include file="components/message.jsp" %>
+
+                <!--browse products-->
+                <%                    ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
+                    List<Product> list = pdao.getAllEnabledApprovedProducts();
+                %>
+
+                <div class="container py-2">
+                    <form class="d-flex" role="search" style="width: 30vw;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success hv" type="submit">Search</button>
+                    </form>
+                    <div class="row">
+                        <%
+                            for (Product product : list) {
+                                String sellprice = pdao.getSellingPrice(product.getpSellPrice());
+                                String rentprice = pdao.getRentPrice(product.getpRentPrice());
+                        %>
+                        <div class="col-md-4">
+                            <div class="card mt-4 product-card" style="height: 64vh">                                
+                                <div class="card-header custom-bg"></div>
+                                <div class="card-body" >
+                                    <div class="container text-center">
+                                        <img src="img/products/<%= product.getpPhoto1()%>" style="height: 200px; width: 200px;" class="card-img-top" alt="...">
+                                    </div>
+                                    <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
+                                    <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
+                                </div>
+                                <div class="card-footer">
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn">Rent: <%= rentprice%><span class="text-secondary rent-duration"> <%= product.getpRentDuration()%> </span></button>
+                                    <%
+                                        if (sellprice.equals("not for sale")) {
+                                    %>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <span class="text-secondary rent-duration"> <%= sellprice%> </span></button>
+                                    <%
+                                    } else {
+                                    %>
+                                    <button style="border-color: #075B7A ; color: #075B7A; padding: 4px;" class="btn"> Buy: <%= sellprice%></button>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%
+                            }
+
+                            if (list.size() == 0) {
+                                out.println("<h2>No product available..</h2>");
+                            }
+                            //                    }
+                        %>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
 
