@@ -78,15 +78,7 @@
                 <div class="container py-2">
                     <div class="row" data-masonry='{"percentPosition": true }'>
                         <%
-                            int j;
-                            if (list.size() > 6) {
-                                j = 6;
-                            } else {
-                                j = list.size();
-                            }
-                            //                    for (Product product : list) {
-                            for (int i = 0; i < j; i++) {
-                                Product product = list.get(i);
+                            for (Product product : list) {
                                 String sellprice = pdao.getSellingPrice(product.getpSellPrice());
                                 String rentprice = pdao.getRentPrice(product.getpRentPrice());
                         %>
@@ -122,7 +114,7 @@
                                 out.println("<h2>No product available..</h2>");
                             }
                             //                    }
-                        %>
+%>
                     </div>
                 </div>
 

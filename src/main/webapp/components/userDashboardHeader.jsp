@@ -7,7 +7,7 @@
     <div class="col-md-2">
         <div class="list-group mt-4">
             <a href="" class="list-group-item list-group-item-action active custom-bg " style="border: #ef0078" aria-current="true">Menu</a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile-user" class="list-group-item list-group-item-action">Edit Profile</a>
             <a href="requests.jsp" class="list-group-item list-group-item-action">Requests sent</a>
             <a href="ScheduledExchanges.jsp" class="list-group-item list-group-item-action">Schedule Exchanges</a>
         </div>
@@ -57,7 +57,7 @@
                     <a href="" class="list-group-item list-group-item-action active custom-bg " style="border: #ef0078" aria-current="true">
                         Menu
                     </a>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile" class="list-group-item list-group-item-action">Edit Profile</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-profile-seller" class="list-group-item list-group-item-action">Edit Profile</a>
                     <a href="requests.jsp" class="list-group-item list-group-item-action">Request</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Add-product" class="list-group-item list-group-item-action">Add new product</a>
                     <a href="ScheduledExchanges.jsp" class="list-group-item list-group-item-action">Schedule Exchanges</a>

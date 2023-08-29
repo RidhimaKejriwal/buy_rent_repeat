@@ -9,8 +9,8 @@
 <%@page import="com.learn.buyrent.dao.ProductDao"%>
 <%@page import="com.learn.buyrent.entities.Seller"%>
 <%
-    Seller cseller = (Seller) session.getAttribute("current-seller");
-    if (cseller == null) {
+    Seller seller = (Seller) session.getAttribute("current-seller");
+    if (seller == null) {
         session.setAttribute("error_message", "You are not logged in!! Login first..");
         response.sendRedirect("login.jsp");
         return;
@@ -52,20 +52,20 @@
                                 <table width="100%">
                                     <tr>
                                         <td width="20%">
-                                            <img src="img/seller/<%= cseller.getUserPic()%>" alt="img" style="height: 100px; width: 100px; margin-left: 25px;">
+                                            <img src="img/seller/<%= seller.getUserPic()%>" alt="img" style="height: 100px; width: 100px; margin-left: 25px;">
                                         </td>
                                         <td>
                                             <table width="100%">
                                                 <tr class="text-center">
-                                                    <td colspan="2" style="color: #075B7A"><h1><%= cseller.getUserName()%></h1></td>
+                                                    <td colspan="2" style="color: #075B7A"><h1><%= seller.getUserName()%></h1></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Email: <span style="color: #212121"><%= cseller.getUserEmail()%></span></h5></td>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Phone: <span style="color: #212121"><%= cseller.getUserPhone()%></span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Email: <span style="color: #212121"><%= seller.getUserEmail()%></span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Phone: <span style="color: #212121"><%= seller.getUserPhone()%></span></h5></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Address: <span style="color: #212121"><%= cseller.getUserAddress()%></span></h5></td>
-                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">City: <span style="color: #212121"><%= cseller.getUserCity()%></span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">Address: <span style="color: #212121"><%= seller.getUserAddress()%></span></h5></td>
+                                                    <td><h5 style="color: #B0BEC5; font-weight: normal">City: <span style="color: #212121"><%= seller.getUserCity()%></span></h5></td>
                                                 </tr>
                                             </table>                                            
                                         </td>
@@ -89,7 +89,7 @@
                 <!--disabled products-->
                 <%
                     ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
-                    List<Product> list = pdao.getAllDisabledApprovedSellerProducts(cseller.getUserId());
+                    List<Product> list = pdao.getAllDisabledApprovedSellerProducts(seller.getUserId());
                 %>
 
                 <div class="container py-2">

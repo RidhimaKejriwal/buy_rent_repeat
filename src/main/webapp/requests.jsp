@@ -80,10 +80,6 @@
                                             %>
 
                                         </div>
-                                        <!--                                        <div class="col-md-2 text-center">
-                                                                                    <a href="ApproveServlet?product_id=<%= product.getpId()%>&op=approve"><button class="btn custom-bg2" style="margin-top: 2vh;">Approve</button><a>
-                                                                                    <a href="ApproveServlet?product_id=<%= product.getpId()%>&op=reject"><button class="btn custom-bg2" style="margin-top: 2vh;">Reject</button></a>
-                                                                                </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -101,9 +97,7 @@
 
             </div>
         </div>
-
-    </div>
-</div>
+                      
 <%
 } else {
 %>
@@ -172,11 +166,11 @@
 
             </div>
         </div>
-
-    </div>
-</div>
+        <%@include file="components/modals.jsp" %>
 <%
     }
 %>
+
+
 </body>
 </html>

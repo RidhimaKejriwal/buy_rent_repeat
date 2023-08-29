@@ -35,12 +35,22 @@
         %>
         <div>
             <table class="table table-success table-striped-columns" style="width: 100%; border: 1px solid black;" >
+                <tr align="center">
+                    <th>Organization Name</td>
+                    <th>Cause</td>
+                    <th>City</td>
+                    <th>Email</td>
+                    <th>Phone</td>
+                </tr>
                 <%
                     for (NGO ngo : list1) {
                 %>
                 <tr align="center">
                     <td><a href="<%= ngo.getLink()%>"><%= ngo.getName()%></a></td>
                     <td><%= ngo.getCause() %></td>
+                    <td><%= ngo.getCity() %></td>
+                    <td><%= ngo.getEmail() %></td>
+                    <td><%= ngo.getPhone() %></td>
                 </tr>
                 <%
                     }

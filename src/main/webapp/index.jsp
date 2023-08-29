@@ -143,7 +143,7 @@
         %>
 
         <div class="container py-2">
-            <div class="row" data-masonry='{"percentPosition": true }'>
+            <div class="row" >
                 <%
                     int j;
                     if (list.size() > 6) {
@@ -158,11 +158,11 @@
                         String rentprice = pdao.getRentPrice(product.getpRentPrice());
                 %>
                 <div class="col-md-4">
-                    <div class="card mt-4 product-card" >                                
+                    <div class="card mt-4 product-card" style="height: 64vh">                                
                         <div class="card-header custom-bg"></div>
                         <div class="card-body" >
                             <div class="container text-center">
-                                <img src="img/products/<%= product.getpPhoto1()%>" style="max-height: 300px; max-width: 100%; width: auto;" class="card-img-top" alt="...">
+                                <img src="img/products/<%= product.getpPhoto1()%>" style="height: 200px; width: 200px;" class="card-img-top" alt="...">
                             </div>
                             <h5  class="card-title mt-3"> <%= product.getpName()%></h5>
                             <p class="card-text"> <%= Helper.get10Words(product.getpDesc())%> <a href="productDisplay.jsp?product_id=<%= product.getpId()%>">Show more</a></p>
