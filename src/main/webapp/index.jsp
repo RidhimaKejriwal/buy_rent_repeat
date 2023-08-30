@@ -70,6 +70,7 @@
 
 
         <%//            out.println(FactoryProvider.getFactory());
+            String cat = request.getParameter("category");
             CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
             List<Category> list1 = cdao.getCategories();
         %>
@@ -80,14 +81,15 @@
                         for (Category category : list1) {
                     %>
 
-                    <td><%= category.getCategoryTitle()%></td>
+                    <td><a class="blink" style="color: black; text-decoration: none" href="browse.jsp?category=<%= category.getCategoryId() %>"><%= category.getCategoryTitle()%></a></td>
 
-                    <%
-                        }
-                    %>
+                <%
+                    }
+                %>
                 </tr>
             </table>
         </div>
+                
         <!--cover photo-->
         <div class="container">
             <div class="row mt-4 mb-3">

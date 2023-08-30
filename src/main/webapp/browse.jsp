@@ -74,6 +74,7 @@
         </nav>
 
         <%//            out.println(FactoryProvider.getFactory());
+            String cat = request.getParameter("category");
             CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
             List<Category> list1 = cdao.getCategories();
         %>
@@ -84,11 +85,11 @@
                         for (Category category : list1) {
                     %>
 
-                    <td><%= category.getCategoryTitle()%></td>
+                    <td><a class="blink" style="color: black; text-decoration: none" href="browse.jsp?category=<%= category.getCategoryId() %>"><%= category.getCategoryTitle()%></a></td>
 
-                    <%
-                        }
-                    %>
+                <%
+                    }
+                %>
                 </tr>
             </table>
         </div>
@@ -103,7 +104,14 @@
 
                 <!--browse products-->
                 <%                    ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
-                    List<Product> list = pdao.getAllEnabledApprovedProducts();
+                    List<Product> list = null;
+                    if (cat == null || cat.trim().equals("all")) {
+                        list = pdao.getAllEnabledApprovedProducts();
+                    } else {
+                        int cid = Integer.parseInt(cat.trim());
+                        list = pdao.getAllEnabledApprovedProductsbyCategory(cid);
+                    }
+
                 %>
 
                 <div class="container py-2">
@@ -112,8 +120,7 @@
                         <button class="btn btn-outline-success hv" type="submit">Search</button>
                     </form>
                     <div class="row">
-                        <%
-                            for (Product product : list) {
+                        <%                            for (Product product : list) {
                                 String sellprice = pdao.getSellingPrice(product.getpSellPrice());
                                 String rentprice = pdao.getRentPrice(product.getpRentPrice());
                         %>
@@ -149,7 +156,7 @@
                                 out.println("<h2>No product available..</h2>");
                             }
                             //                    }
-                        %>
+%>
                     </div>
                 </div>
 

@@ -24,6 +24,10 @@
     color: #CFD8DC!important;
 }
 
+.blink:hover{
+    color: darkolivegreen!important;
+}
+
 .cover{
     height: 200px;
     width: auto;

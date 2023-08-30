@@ -75,13 +75,25 @@ public class ProductDao {
         return list;        
     }
     
-     //get all enabled approved products of all sellers
+     //get all enabled approved products
     public List<Product> getAllEnabledApprovedProducts()
     {
         Session s = this.factory.openSession();
         Query query = s.createQuery("from Product where product_Enable =: e and product_Approved =: a");
         query.setParameter("e", "yes");
         query.setParameter("a", "yes");
+        List<Product> list = query.list();
+        return list;        
+    }
+    
+     //get all enabled approved products by category id
+    public List<Product> getAllEnabledApprovedProductsbyCategory(int cid)
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from Product as p where product_Enable =: e and product_Approved =: a and p.category.categoryId =: id");
+        query.setParameter("e", "yes");
+        query.setParameter("a", "yes");
+        query.setParameter("id", cid);
         List<Product> list = query.list();
         return list;        
     }
