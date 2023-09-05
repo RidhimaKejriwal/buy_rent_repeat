@@ -3,9 +3,11 @@ package com.learn.buyrent.dao;
 
 import com.learn.buyrent.entities.Product;
 import java.util.List;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 public class ProductDao {
@@ -95,6 +97,22 @@ public class ProductDao {
         query.setParameter("a", "yes");
         query.setParameter("id", cid);
         List<Product> list = query.list();
+        return list;        
+    }
+    
+    public List<Product> getSearchedProducts(String ch)
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from Product as p where p.pName like :key and product_Enable =: e and product_Approved =: a");
+        query.setParameter("e", "yes");
+        query.setParameter("a", "yes");
+        query.setParameter("key", "%"+ch+"%");
+//        List<Object[]> list1 = query.list();
+        List<Product> list = query.list();
+//        for(Object[] product : list1)
+//        {
+//            
+//        }
         return list;        
     }
     

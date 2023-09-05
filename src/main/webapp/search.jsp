@@ -1,8 +1,3 @@
-<%-- 
-    Document   : browse
-    Created on : 28-Aug-2023, 3:06:36 pm
-    Author     : Dell
---%>
 
 <%@page import="com.learn.buyrent.helper.Helper"%>
 <%@page import="com.learn.buyrent.entities.Product"%>
@@ -17,11 +12,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>buyRent : Browse Products</title>
+        <title>JSP Page</title>
         <link rel="stylesheet" href="css/style.css">
         <script src="js/script.js" ></script>
         <%@include file="components/common_css_js.jsp" %>
         <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+        
     </head>
     <body>
         <!--navbar-->
@@ -105,8 +101,9 @@
                 <!--browse products-->
                 <%                    ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
                     List<Product> list = null;
-                    if (cat == null || cat.trim().equals("all")) {
-                        list = pdao.getAllEnabledApprovedProducts();
+                    if (cat == null) {
+                        String ch = request.getParameter("ch");
+                        list = pdao.getSearchedProducts(ch);
                     } else {
                         int cid = Integer.parseInt(cat.trim());
                         list = pdao.getAllEnabledApprovedProductsbyCategory(cid);
@@ -179,11 +176,6 @@
                 </div>
 
             </div>
-        </div>
-
-        <!--footer-->
-        <div class="container-fluid text-center" style="background-color: #1e4040">
-            <h5 style="margin-bottom: 0; color: white;">Contact us at : requestrentrepeat@gmail.com</h5>
         </div>
     </body>
 </html>

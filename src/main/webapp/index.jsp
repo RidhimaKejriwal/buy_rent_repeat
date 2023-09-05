@@ -96,8 +96,8 @@
                 <div class="col" style="margin-top: 100px;">
                     <h1>Why <b class="highlight">buy</b> when you can <b class="highlight">borrow</b>?</h1>
                     <p style="text-align: left">Connect with people in your area and exchange the Stuff and return them after use at fairly low rent.</p>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" action="search.jsp" method="post" role="search">
+                        <input class="form-control me-2" type="search" name="ch" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success hv" type="submit">Search</button>
                     </form>
                     <div style="margin-top: 20px;">
