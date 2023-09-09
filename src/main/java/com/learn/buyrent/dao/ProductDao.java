@@ -2,6 +2,7 @@
 package com.learn.buyrent.dao;
 
 import com.learn.buyrent.entities.Product;
+import com.learn.buyrent.entities.RentCart;
 import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -40,6 +41,21 @@ public class ProductDao {
         }
         
         return f;
+    }
+    
+    public void updateProduct(Product product)
+    {
+        try
+        {
+            Session session = this.factory.openSession();
+            Transaction tx = session.beginTransaction();
+            session.update(product);
+            tx.commit();
+            session.close();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }        
     }
     
     //get all enabled approved seller products of sellerid

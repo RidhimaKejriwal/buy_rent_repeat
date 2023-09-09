@@ -107,7 +107,7 @@
 
                 </div>
                 <div class="col">
-                    <img src="img/home.jpeg" style="height: 500px; width: 650px;;" alt="img..">
+                    <img src="img/home.jpeg" style="height: 70vh; width: 45vw;" alt="img..">
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@
                     <p>Buy less, Rent for a fraction of the cost.</p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <img class="icon" src="img/network.png" </span>
+                    <img class="icon" src="img/network.png" />
                     <h3 class="highlight">Connect with community</h3>
                     <p>Borrow things from your neighbours instead of buying.</p>
                 </div>
@@ -199,7 +199,7 @@
         <div id="donate" class="container-fluid" style="background-color: #1e4040">
             <div class="row mt-4">
                 <div class="col">
-                    <img src="img/donate.png" style="height: 400px; width: 550px;;" alt="img..">
+                    <img src="img/donate.png" style="height: 70vh; width: 50vw;" alt="img..">
                 </div>
                 <div class="col" style="margin-top: 100px;">
                     <h1 style="color: white; text-align: center">Give your unused stuff for the <b style="color: cyan">happiness</b> of others.</h1>
@@ -208,7 +208,6 @@
                         <a href="donate.jsp"><button type='button' class="btn custom-bg2">Donate Now!</button></a>
                     </div>
                 </div>
-
             </div>
         </div>
 

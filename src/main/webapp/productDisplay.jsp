@@ -135,9 +135,19 @@
 
                             <%
                                 if (user == null && seller == null && admin == null) {
+                                    if (product.getpRentPrice() != 0 && product.getpSellPrice() != 0) {
                             %>
-                            <a href="login.jsp"><button style="padding: 5px;" class="btn btn-success text-white"> Add to cart </button></a>
+                            <a href="login.jsp"><button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Rent </button></a>
+                            <a href="login.jsp"><button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Buy </button></a>
+                            <%                            } else if (product.getpRentPrice() == 0) {
+                            %>
+                            <a href="login.jsp"><button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Buy </button></a>
                             <%
+                            } else {
+                            %>
+                            <a href="login.jsp"><button style="padding: 5px; padding-left: 10px; padding-right: 10px;" class="btn btn-success text-white"> Rent </button></a>
+                            <%
+                                    }
                                 }
                             %>
                         </div>

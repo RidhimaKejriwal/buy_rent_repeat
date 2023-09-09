@@ -33,6 +33,7 @@ public class SellProductServlet extends HttpServlet {
             String modeOfDelivery = request.getParameter("delivery_mode");
             String exDate = request.getParameter("date");
             LocalDate ldate = LocalDate.parse(exDate);
+            String processComplete = "incomplete";
             
             HttpSession httpSession = request.getSession();
             
@@ -52,6 +53,7 @@ public class SellProductServlet extends HttpServlet {
             rcart.setExchangeDate(ldate);
             rcart.setRequestAccepted("no");
             rcart.setIsDelivered("no");
+            rcart.setProcessComplete(processComplete);
             
             Session hibernateSession = FactoryProvider.getFactory().openSession();
             Transaction tx = hibernateSession.beginTransaction();

@@ -70,39 +70,40 @@ public class RentCartDao
     
     public int finalRentPrice(int rentPrice, String rentDuration , int durationNumber, String durationType)
     {
-        int price = 0;
+        float price = 0;
         float priceperday = 0;
         switch (rentDuration) {
             case "per Day":
-                priceperday = rentPrice;
+                priceperday = (float)rentPrice;
                 break;
             case "per Week":
-                priceperday = rentPrice/7;
+                priceperday = (float)rentPrice/7;
                 break;
             case "per Month":
-                priceperday = rentPrice/30;
+                priceperday = (float)rentPrice/30;
                 break;
             case "for 3 months":
-                priceperday = rentPrice/90;
+                priceperday = (float)rentPrice/90;
                 break;
             case "for 6 months":
-                priceperday = rentPrice/180;
+                priceperday = (float)rentPrice/180;
                 break;
             default:
                 break;
         }
+        
         if(durationType.equals("day(s)")){
-            price = (int)priceperday * durationNumber;
+            price = priceperday * durationNumber;
         }
         else if(durationType.equals("week(s)"))
         {
-            price = (int)priceperday * durationNumber * 7;
+            price = priceperday * durationNumber * 7;
         }
         else if(durationType.equals("month(s)"))
         {
-            price = (int)priceperday * durationNumber * 30;
+            price = priceperday * durationNumber * 30;
         }
-        return price;
+        return (int)price;
     }
     
     public String finalRentDuration(int durationNumber, String durationType)

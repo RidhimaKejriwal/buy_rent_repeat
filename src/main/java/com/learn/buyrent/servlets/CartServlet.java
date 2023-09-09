@@ -1,8 +1,10 @@
 package com.learn.buyrent.servlets;
 
+import com.learn.buyrent.dao.ProductDao;
 import com.learn.buyrent.dao.RentCartDao;
 import com.learn.buyrent.dao.SellerDao;
 import com.learn.buyrent.dao.UserDao;
+import com.learn.buyrent.entities.Product;
 import com.learn.buyrent.entities.RentCart;
 import com.learn.buyrent.entities.Seller;
 import com.learn.buyrent.entities.User;
@@ -34,6 +36,8 @@ public class CartServlet extends HttpServlet {
             Seller seller = sdao.getUserById(rentProduct.getSellerId());
             UserDao udao = new UserDao(factory);
             User user = udao.getUserById(rentProduct.getUserId());
+            ProductDao pdao = new ProductDao(factory);
+            Product pd = pdao.getProductbyId(rentProduct.getProductId());
             HttpSession session = request.getSession();
 
             String mode = rentProduct.getModeOfDelivery();
@@ -43,12 +47,14 @@ public class CartServlet extends HttpServlet {
             switch (op) {
                 case "approve":
                     rentProduct.setRequestAccepted("yes");
+                    pd.setProduct_Enable("no");
                     if (mode == null || mode.equals("pickup")) {
                         sm.cartRequestAccepted(seller, user, rentProduct);
                     } else {
                         sm.buyRequestAccepted(user, rentProduct);
                     }
                     rcdao.updateProduct(rentProduct);
+                    pdao.updateProduct(pd);
                     response.sendRedirect("requests.jsp");
                     break;
                 case "reject":
@@ -73,6 +79,7 @@ public class CartServlet extends HttpServlet {
                         rentProduct.setIsDelivered("yes");
                         if (mode != null) {
                             rentProduct.setProcessComplete("complete");
+                            // pdao.deleteproduct(rentProduct.getProductId())
                         }
                         rentProduct.setVerifyOTP(null);
                         rcdao.updateProduct(rentProduct);
@@ -97,7 +104,9 @@ public class CartServlet extends HttpServlet {
                     if( entered_code.equals(database_code)){
                         rentProduct.setIsReturned("yes");
                         rentProduct.setProcessComplete("complete");
+                        pd.setProduct_Enable("yes");
                         rentProduct.setVerifyOTP(null);
+                        pdao.updateProduct(pd);
                         rcdao.updateProduct(rentProduct);
                         response.sendRedirect("ScheduledExchanges.jsp");
                     }
