@@ -50,6 +50,7 @@
             <artifactId>jakarta.mail</artifactId>
             <version>1.0.0</version>
         </dependency>
+        
     </dependencies>
     
      <build>

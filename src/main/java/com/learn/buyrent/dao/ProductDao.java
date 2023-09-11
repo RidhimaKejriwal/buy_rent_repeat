@@ -2,13 +2,10 @@
 package com.learn.buyrent.dao;
 
 import com.learn.buyrent.entities.Product;
-import com.learn.buyrent.entities.RentCart;
 import java.util.List;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 public class ProductDao {
@@ -100,6 +97,19 @@ public class ProductDao {
         Query query = s.createQuery("from Product where product_Enable =: e and product_Approved =: a");
         query.setParameter("e", "yes");
         query.setParameter("a", "yes");
+        List<Product> list = query.list();
+        return list;        
+    }
+    
+     //get all enabled approved products
+    public List<Product> getAllEnabledApprovedPaginationProducts(int start, int max)
+    {
+        Session s = this.factory.openSession();
+        Query query = s.createQuery("from Product where product_Enable =: e and product_Approved =: a");
+        query.setParameter("e", "yes");
+        query.setParameter("a", "yes");
+        query.setFirstResult(start);
+        query.setMaxResults(max);
         List<Product> list = query.list();
         return list;        
     }

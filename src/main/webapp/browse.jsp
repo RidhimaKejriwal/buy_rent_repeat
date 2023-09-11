@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@page import="java.util.Map"%>
 <%@page import="com.learn.buyrent.helper.Helper"%>
 <%@page import="com.learn.buyrent.entities.Product"%>
 <%@page import="com.learn.buyrent.dao.ProductDao"%>
@@ -27,6 +28,8 @@
         <!--navbar-->
         <%
             User user1 = (User) session.getAttribute("current-user");
+            // getting count
+            Map<String, Long> m = Helper.getCounts(FactoryProvider.getFactory());
         %>
         <nav class="navbar navbar-expand-lg navbar-dark custom-bg">
             <div class="container-fluid">
@@ -75,6 +78,7 @@
 
         <%//            out.println(FactoryProvider.getFactory());
             String cat = request.getParameter("category");
+            int pageNo = request.getParameter("pgNo")==null?0:Integer.parseInt(request.getParameter("pgNo"));
             CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
             List<Category> list1 = cdao.getCategories();
         %>
@@ -85,11 +89,11 @@
                         for (Category category : list1) {
                     %>
 
-                    <td><a class="blink" style="color: black; text-decoration: none" href="browse.jsp?category=<%= category.getCategoryId() %>"><%= category.getCategoryTitle()%></a></td>
+                    <td><a class="blink" style="color: black; text-decoration: none" href="browse.jsp?category=<%= category.getCategoryId()%>"><%= category.getCategoryTitle()%></a></td>
 
-                <%
-                    }
-                %>
+                    <%
+                        }
+                    %>
                 </tr>
             </table>
         </div>
@@ -106,7 +110,7 @@
                 <%                    ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
                     List<Product> list = null;
                     if (cat == null || cat.trim().equals("all")) {
-                        list = pdao.getAllEnabledApprovedProducts();
+                        list = pdao.getAllEnabledApprovedPaginationProducts(pageNo*6, 6);
                     } else {
                         int cid = Integer.parseInt(cat.trim());
                         list = pdao.getAllEnabledApprovedProductsbyCategory(cid);
@@ -125,7 +129,7 @@
                                 String rentprice = pdao.getRentPrice(product.getpRentPrice());
                         %>
                         <div class="col-md-4">
-                            <div class="card mt-4 product-card" style="height: 64vh">                                
+                            <div class="card mt-4 product-card" style="height: 67vh">                                
                                 <div class="card-header custom-bg"></div>
                                 <div class="card-body" >
                                     <div class="container text-center">
@@ -156,10 +160,26 @@
                                 out.println("<h2>No product available..</h2>");
                             }
                             //                    }
-%>
-                    </div>
-                </div>
+                        %>
 
+                    </div>
+                    <!--pagination -->
+                    <nav style="margin-top: 20px;" aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <%
+                                    //                                Long count = m.get("enabledApprovedCount");
+                                    //                                Long pages = count/6;
+                                    for (int i = 0; i <= m.get("enabledApprovedCount") / 6; i++) {
+                                %>
+                            <li class="page-item"><a class="page-link" href="browse.jsp?pgNo=<%=i%>"><%=i+1%></a></li>
+                                <%
+                                    }
+                                %>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
 
