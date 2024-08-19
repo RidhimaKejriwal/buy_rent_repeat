@@ -22,8 +22,7 @@ public class GmailSender
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         
-        String username = "requestrentrepeat";
-        String password = "oinavaohplnkldvf";
+        
         
         // session
         Session session = Session.getInstance(properties,new Authenticator() {
